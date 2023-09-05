@@ -217,7 +217,7 @@ function Todo() {
                                                     
                                                     <button className='btn btn-danger' onClick={() => deleteTodo(item.id)}>Xóa</button>
                                                     {item.status==1 ? 
-                                                    <button className=' ms-2 btn btn-warning' disabled onClick={() => editTodo(item.id,item.note)}>Sửa</button>
+                                                    <button className=' ms-2 btn btn-secondary' disabled onClick={() => editTodo(item.id,item.note)}>Sửa</button>
                                                     : 
                                                     <button className=' ms-2 btn btn-warning'  onClick={() => editTodo(item.id,item.note)}>Sửa</button>
                                                     }
