@@ -19,7 +19,7 @@ function Login() {
     const checkLogin = async (e) => {
         e.preventDefault();
         // Promise 
-        if(!email ||email==''){
+        if(!email ||email==''||email==undefined){
           Toast.fire({
             icon: 'error',
             title: 'Chưa nhập email'
