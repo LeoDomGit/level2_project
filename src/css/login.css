@@ -4,10 +4,16 @@
     box-sizing: border-box;
 
 }
+.wrapper{
+    width: 100%;
+    background-color: rgb(69, 160, 224);
+    min-height: 1000px;
+        padding-top: 10%;
+}
 .container1 {
     width:60%;
-    margin: 10% auto;
-    background-color: white;
+    margin: 0% auto;
+    background-color: rgb(218, 218, 218);
     box-shadow: 2px 2px 2px 2px grey;
     border-radius: 7px;
 }
