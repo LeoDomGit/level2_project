@@ -1,0 +1,19 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+
+}
+.container1 {
+    width:60%;
+    margin: 10% auto;
+    background-color: white;
+    box-shadow: 2px 2px 2px 2px grey;
+    border-radius: 7px;
+}
+.maincontainer{
+    width: 100%;
+}
+.col2{
+    padding-top: 20%;
+}
