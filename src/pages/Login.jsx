@@ -19,7 +19,13 @@ function Login() {
     const checkLogin = async (e) => {
         e.preventDefault();
         // Promise 
-        const response = await fetch('https://students.trungthanhweb.com/api/checkLoginhtml', {
+        if(!email ||email==''){
+          Toast.fire({
+            icon: 'error',
+            title: 'Chưa nhập email'
+          })
+        }else{
+          const response = await fetch('https://students.trungthanhweb.com/api/checkLoginhtml', {
             method:"POST",
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -30,10 +36,12 @@ function Login() {
         localStorage.setItem('token',result.apitoken);
         Toast.fire({
             icon: 'success',
-            title: 'Signed in successfully'
+            title: 'Đăng nhập thành công'
           }).then(()=>{
             window.location.replace('/home');
           })
+        }
+
 
       }
     return (
