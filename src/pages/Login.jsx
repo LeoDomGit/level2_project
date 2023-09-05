@@ -13,13 +13,13 @@ function Login() {
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
       })
-    const [email, setEmail] = useState({});
+    const [email, setEmail] = useState('');
     var data = new URLSearchParams();
     data.append('email',email);
     const checkLogin = async (e) => {
         e.preventDefault();
         // Promise 
-        if(!email ||email==''||email==undefined){
+        if(!email ||email===''||email==undefined){
           Toast.fire({
             icon: 'error',
             title: 'Chưa nhập email'
