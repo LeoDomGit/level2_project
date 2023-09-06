@@ -10,6 +10,7 @@ function Todo1() {
     const [edit, setEdit] = useState(false);
     const [id, setID] = useState(0);
     const todos = useSelector((state) => state.task);
+    console.log(todos);
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -80,7 +81,7 @@ function Todo1() {
     }
     const submitTodo = async (e) => {
         e.preventDefault();
-        if (!item || item === '') {
+        if (!item || item == '') {
             Toast.fire({
                 icon: 'error',
                 title: 'Chưa nhập todo'
