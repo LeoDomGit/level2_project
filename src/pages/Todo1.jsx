@@ -27,6 +27,10 @@ function Todo1() {
             id:id,
             todo:item
         }))
+        Toast.fire({
+            icon: 'success',
+            title: 'Đã thay đổi thành công'
+          })
     }
     const editSetup = (i,e)=>{
         setID(i);
