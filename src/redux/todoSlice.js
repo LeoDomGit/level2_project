@@ -20,7 +20,6 @@ export const taskSlice = createSlice({
             });
         },
         finishtask : (state,action)=>{
-            console.log(action.payload);
             state.task.forEach(el => {
                 if(el.id===action.payload){
                         el.status=true
@@ -28,6 +27,9 @@ export const taskSlice = createSlice({
                 }
 
             });
+        },
+        deleteTask : (state,action)=>{
+            state.filter((todo)=>todo.id != action.payload);
         }
     }
 })
