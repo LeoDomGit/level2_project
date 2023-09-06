@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from "../components/Navbar";
 import Swal from 'sweetalert2'
 import { useDispatch, useSelector } from "react-redux";
-import { addTask,selectTask,editTask,finishtask } from "../redux/todoSlice";
+import { addTask,selectTask,editTask,finishtask,deleteTaskSlice } from "../redux/todoSlice";
 
 function Todo1() {
     const dispatch = useDispatch();
@@ -64,7 +64,7 @@ function Todo1() {
           }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                
+                dispatch(deleteTaskSlice(i))
             } else if (result.isDenied) {
             }
           })
