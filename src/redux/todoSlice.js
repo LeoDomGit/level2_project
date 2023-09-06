@@ -1,4 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+export const getTodo = createAsyncThunk('todos/getTodos' , async ()=>{
+    return fetch("https://students.trungthanhweb.com/api/todo?apitoken="+localStorage.getItem('token'))
+    .then((res)=>res.json());
+})
 const initialState={
     task :[],
 }
@@ -13,7 +17,7 @@ export const taskSlice = createSlice({
         editTask: (state,action)=>{
             state.task.forEach(el => {
                 if(el.id===action.payload.id){
-                        el.todo=action.payload.todo;
+                        el.note=action.payload.todo;
                         el.status=false
                 }
 
@@ -31,6 +35,19 @@ export const taskSlice = createSlice({
         deleteTaskSlice : (state,action)=>{
             console.log(action.payload);
             state.task= state.task.filter((ỉtem)=>ỉtem.id !== action.payload);
+        }
+
+    },
+    extraReducers:{
+        [getTodo.pending]: (state,action)=>{
+            state.loading=true;
+        },
+        [getTodo.fulfilled]:(state,action)=>{
+            state.loading=false;
+            state.task= action.payload.todo
+        },
+        [getTodo.rejected]:(state,action)=>{
+            state.loading=false;
         }
     }
 })
