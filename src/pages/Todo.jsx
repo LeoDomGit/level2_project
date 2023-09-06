@@ -205,7 +205,19 @@ function Todo() {
                                         Todo.map((item, index) =>
                                             <tr key={item.id} className="">
                                                 <td >{++index}</td>
-                                                <td>{item.note}</td>
+                                                <td>
+                                                {
+                                                    item.status ==  1 ?
+                                                    <b style={{'text-decoration-line':'line-through'}}>
+                                                    {item.note}
+                                                    </b>
+                                                    
+                                                    :
+                                                    <b>
+                                                        {item.note}
+                                                    </b>
+                                                }
+                                                    </td>
                                                 <td>{
                                                     item.status == 1 ?
                                                         <input type="checkbox"  checked disabled />

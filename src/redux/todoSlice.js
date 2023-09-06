@@ -30,8 +30,7 @@ export const taskSlice = createSlice({
         },
         deleteTaskSlice : (state,action)=>{
             console.log(action.payload);
-                state.task.filter((task)=>task.id !== action.payload);
-                console.log(state.task);
+            state.task= state.task.filter((ỉtem)=>ỉtem.id !== action.payload);
         }
     }
 })
