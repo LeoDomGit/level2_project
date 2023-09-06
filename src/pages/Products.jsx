@@ -1,12 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from "../components/Navbar";
 import Product from '../components/Product';
-function Products(props) {
+function Products() {
+  // const [cates,setCate]= useState([]);
+  // const [brands,setBrand]= useState([]);
 
+  // const getValue = async ()=>{
+  //   const result = await fetch('https://students.trungthanhweb.com/api/home?apitoken='+localStorage.getItem('token'))
+  //   .then((res)=>res.json());
+  //   if(result.categrories){
+  //   setCate(result.categrories);
+  //   }
+  //   if(result.brands){
+  //     setBrand(result.brands);
+  //   }
+
+  // }
+  // useEffect(()=>{
+  //   if(localStorage.getItem('token')&& localStorage.getItem("token")!=null){
+  //     getValue();
+  //   }
+  // },[])
 
   return (
     <>
-    <Navbar brands={props.brands} cates={props.cates}/>
+    <Navbar/>
     <div className='container'>
 
       <div className="row mt-4">

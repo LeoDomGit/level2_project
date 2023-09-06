@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Swal from 'sweetalert2'
+import { useDispatch, useSelector } from "react-redux";
+import { getBrand } from "../redux/brandSlice";
+import { getCates } from "../redux/cateSlice";
 
 function Navbar(props) {
   if(!localStorage.getItem('token')||localStorage.getItem('token')==null){
     window.location.replace('/login');
   }
-  console.log(props.brands);
-  console.log(props.cates);
+  const dispatch = useDispatch();
+  const {brands,loading}= useSelector((state)=>state.brand);
+  const {cates}= useSelector((state)=> state.cate);
+  useEffect(()=>{
+    dispatch(getBrand());
+    dispatch(getCates());
+
+  },[]);
   return (
     <div>
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -30,8 +40,8 @@ function Navbar(props) {
             Thương hiệu
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            {props.brands && props.brands.map((item)=>
-            <li><a className="dropdown-item" href={"#"}>{item.name}</a></li>
+            {brands && brands.map((item,index)=>
+            <li key={index}><a className="dropdown-item" href={"#"}>{item.name}</a></li>
             
             )}
           </ul>
@@ -41,8 +51,8 @@ function Navbar(props) {
             Loại sản phẩm
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-          {props.cates && props.cates.map((item)=>
-            <li><a className="dropdown-item" href={"#"}>{item.name}</a></li>
+          {cates && cates.map((item,index)=>
+            <li key={index}><a className="dropdown-item" href={"#"}>{item.name}</a></li>
             
             )}
           </ul>

@@ -1,25 +1,25 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-export const getBrand = createAsyncThunk('brands/getBrands' , async ()=>{
+export const getCates = createAsyncThunk('cates/getCates' , async ()=>{
     return fetch("https://students.trungthanhweb.com/api/home?apitoken="+localStorage.getItem('token'))
     .then((res)=>res.json());
 })
-export const brandSlice = createSlice({
-    name: 'brands',
+export const cateSlice = createSlice({
+    name: 'cates',
     initialState:{
-        brands:[],
+        cates:[],
         loading:false
     },
     extraReducers:{
-        [getBrand.pending]: (state,action)=>{
+        [getCates.pending]: (state,action)=>{
             state.loading=true;
         },
-        [getBrand.fulfilled]:(state,action)=>{
+        [getCates.fulfilled]:(state,action)=>{
             state.loading=false;
-            state.brands= action.payload.brands
+            state.cates= action.payload.categrories;
         },
-        [getBrand.rejected]:(state,action)=>{
+        [getCates.rejected]:(state,action)=>{
             state.loading=false;
         }
     }
 })
-export default brandSlice.reducer
+export default cateSlice.reducer
