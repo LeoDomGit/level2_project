@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from "../components/Navbar";
 import Swal from 'sweetalert2'
 import { useDispatch, useSelector } from "react-redux";
-import { addTask,selectTask,editTask } from "../redux/todoSlice";
+import { addTask,selectTask,editTask,finishtask } from "../redux/todoSlice";
 
 function Todo1() {
     const dispatch = useDispatch();
@@ -30,6 +30,44 @@ function Todo1() {
         Toast.fire({
             icon: 'success',
             title: 'Đã thay đổi thành công'
+          })
+    }
+    const finishTask = (i)=>{
+        Swal.fire({
+            icon:'question',
+            text: 'Hoàn thành task công việc ?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Đúng',
+            denyButtonText: `Sai`,
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                dispatch(finishtask(i));
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Đã hoàn thành'
+                  })
+            } else if (result.isDenied) {
+
+            }
+          })
+
+    }
+    const deleteTask = (i)=>{
+        Swal.fire({
+            text: 'Xóa task ?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Đúng',
+            denyButtonText: `Không`,
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              Swal.fire('Saved!', '', 'success')
+            } else if (result.isDenied) {
+              Swal.fire('Changes are not saved', '', 'info')
+            }
           })
     }
     const editSetup = (i,e)=>{
@@ -98,14 +136,14 @@ function Todo1() {
                                 <td>
                                     {
                                         item.status==false ? 
-                                         <input type="checkbox"   />
+                                         <input type="checkbox"  onChange={(e)=>finishTask(item.id)} />
                                         :
                                         <input type="checkbox" checked disabled/>
 
                                     }
                                 </td>
                                 <td>
-                                    <button className='btn btn-danger'>Xóa</button>
+                                    <button className='btn btn-danger' onClick={(e)=>deleteTask(item.id)}>Xóa</button>
                                     <button className='ms-3 btn btn-warning' onClick={(e)=>editSetup(item.id,item.todo)}>Sửa</button>
                                 </td>
                                 </tr>

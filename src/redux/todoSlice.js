@@ -11,7 +11,6 @@ export const taskSlice = createSlice({
             state.task.push(action.payload);
         },
         editTask: (state,action)=>{
-            const {id,todo,status} = action.payload;
             state.task.forEach(el => {
                 if(el.id===action.payload.id){
                         el.todo=action.payload.todo;
@@ -19,9 +18,19 @@ export const taskSlice = createSlice({
                 }
 
             });
+        },
+        finishtask : (state,action)=>{
+            console.log(action.payload);
+            state.task.forEach(el => {
+                if(el.id===action.payload){
+                        el.status=true
+                    console.log(state.task);
+                }
+
+            });
         }
     }
 })
-export const {addTask,editTask} = taskSlice.actions;
+export const {addTask,editTask,finishtask} = taskSlice.actions;
 export const selectTask = (state)=>state.task;
 export default taskSlice.reducer
