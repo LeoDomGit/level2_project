@@ -20,6 +20,9 @@ function Navbar() {
         <li className="nav-item">
           <a className="nav-link" href={'/todo'}>Todo</a>
         </li>
+        <li className="nav-item">
+          <a className="nav-link" href={'/todo1'}>Todo2</a>
+        </li>
         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href={"#"} id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
