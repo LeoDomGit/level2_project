@@ -181,7 +181,6 @@ function Todo() {
                         {
                             edit ? 
                             <button className='btn btn-warning w-100 ' onClick={submitEditTodo} >Sửa</button>
-
                             :
                             <button className='btn btn-primary w-100' onClick={submitTodo} >Thêm</button>
                             
