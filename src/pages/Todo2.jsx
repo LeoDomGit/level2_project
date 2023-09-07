@@ -41,7 +41,7 @@ function Todo2() {
                     title: 'Đã hoàn thành'
                 })
             } else if (result.isDenied) {
-
+                
             }
         })
 
