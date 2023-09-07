@@ -134,7 +134,7 @@ function Todo1() {
                                             <td>
                                                 {
                                                     item.status == 1 ?
-                                                        <p style={{ 'text-decoration-line': 'line-through' }}>
+                                                        <p style={{ 'textDecorationLine': 'line-through' }}>
                                                             {item.note}
                                                         </p>
 
