@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {useParams} from "react-router-dom"
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import "../css/detail.css";
 function Detail() {
     const {id} = useParams();
     const baseURL = "https://students.trungthanhweb.com/api/single";
@@ -30,7 +31,7 @@ function Detail() {
         <div>
             <Navbar/>
             <div className="mainProduct">
-            <div className="row">
+            <div className="row w-100">
                 <div className="col-md-4">
                     <img src={image+product.images} alt="" />    
                 </div>
