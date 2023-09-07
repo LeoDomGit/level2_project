@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-    todos :[
-    ],
+    todos :[],
 }
 export const taskSlice1 = createSlice({
     name : 'task1',
@@ -11,7 +10,7 @@ export const taskSlice1 = createSlice({
             state.todos.push(action.payload);
         },
         editTask: (state,action)=>{
-            state.task.forEach(el => {
+            state.todos.forEach(el => {
                 if(el.id===action.payload.id){
                         el.note=action.payload.todo;
                         el.status=false
@@ -21,7 +20,7 @@ export const taskSlice1 = createSlice({
         },
 
         finishtask : (state,action)=>{
-            state.task.forEach(el => {
+            state.todos.forEach(el => {
                 if(el.id===action.payload){
                         el.status=true
                     console.log(state.task);
@@ -31,7 +30,7 @@ export const taskSlice1 = createSlice({
         },
         deleteTaskSlice : (state,action)=>{
             console.log(action.payload);
-            state.task= state.task.filter((ỉtem)=>ỉtem.id !== action.payload);
+            state.todos= state.todos.filter((ỉtem)=>ỉtem.id !== action.payload);
         }
     }
 })
