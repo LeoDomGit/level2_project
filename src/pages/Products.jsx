@@ -4,31 +4,29 @@ import Product from '../components/Product';
 import "../css/products.css";
 function Products() {
   const [products, setProducts] = useState([]);
-  const [nextLink, setnextLink] = useState('https://students.trungthanhweb.com/api/home');
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalpage] = useState(0);
   const image = `https://students.trungthanhweb.com/images/`;
-
-  const getValue = () => {
-     fetch(nextLink + '?apitoken=' + localStorage.getItem('token'))
-      .then((res) => res.json()).then((result)=>{
+  const apitoken = localStorage.getItem('token');
+  const getValue = async () => {
+    fetch(`https://students.trungthanhweb.com/api/home?apitoken=${apitoken}&&page=${page}`)
+      .then((res) => res.json()).then((result) => {
         if (result.products.data.length > 0) {
           setProducts(result.products.data);
-          if (result.products.next_page_url == null) {
-            setnextLink(result.products.first_page_url);
-          } else {
-            setnextLink(result.products.next_page_url);
-          }
+          setTotalpage(result.products.last_page);
         }
       })
-    
 
-  }
-  const loadMore = ()=>{
-    getValue();
+
   }
   useEffect(() => {
     getValue();
-  }, [])
-
+  }, [page])
+  let pages =[];
+  for (let i = 1; i <= totalPage; i++) {
+    pages.push(<li class="page-item" key={i} onClick={()=>{setPage(i)}}><a class="page-link" href="#">{i}</a></li>)
+  }
+  console.log(pages);
   return (
     <>
       <Navbar />
@@ -44,11 +42,18 @@ function Products() {
           </div>
 
         }
-        <div className="row mt-3 text-center">
-          <div className="col-md">
-            <button class="btn btn-primary" onClick={loadMore}>Xem thêm</button>
+          <div className="row mt-3 text-center">
+            <div className="col-md-10">
+
+            </div>
+            <div className="col-md">
+              <nav aria-label="Page navigation example">
+                <ul className="pagination">
+                  {pages}
+                </ul>
+              </nav>
+            </div>
           </div>
-        </div>
       </div>
     </>
   )

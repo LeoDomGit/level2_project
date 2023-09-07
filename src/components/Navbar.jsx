@@ -6,7 +6,7 @@ import { getCates } from "../redux/cateSlice";
 
 function Navbar(props) {
   if(!localStorage.getItem('token')||localStorage.getItem('token')==null){
-    window.location.replace('/login');
+    window.location.replace('/');
   }
   const dispatch = useDispatch();
   const {brands,loading}= useSelector((state)=>state.brand);
