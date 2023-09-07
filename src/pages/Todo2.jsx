@@ -95,6 +95,10 @@ function Todo2() {
             item1.status = false;
             dispatch(addTask(item1))
             setItem('');
+            Toast.fire({
+                icon: 'success',
+                title: 'Đã thêm thành công'
+            })
         }
     }
     const addTodo = ()=>{
