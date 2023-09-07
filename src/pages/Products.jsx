@@ -24,17 +24,16 @@ function Products() {
   }, [page])
   let pages =[];
   for (let i = 1; i <= totalPage; i++) {
-    pages.push(<li class="page-item" key={i} onClick={()=>{setPage(i)}}><a class="page-link" href="#">{i}</a></li>)
+    pages.push(<li className="page-item" key={i} onClick={()=>{setPage(i)}}><a className="page-link" href="#">{i}</a></li>)
   }
-  console.log(pages);
   return (
     <>
       <Navbar />
       <div className='containerProduct'>
         {products && products.length > 0 &&
           <div className="row mt-4">
-            {products.map((item) =>
-              <div className="col-md-3">
+            {products.map((item,index) =>
+              <div className="col-md-3" key={index}>
                 <Product image={image + item.images} name={item.name} price="18000000" />
               </div>
             )}
