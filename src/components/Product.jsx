@@ -13,7 +13,7 @@ function Product(props) {
             </p>
             <div className="row">
               <div className="col-md">
-                <a href="#" className="btn btn-primary w-100">Xem thêm</a>
+                <a href={`chitiet/${props.id}`} className="btn btn-primary w-100">Xem thêm</a>
               </div>
               <div className="col-md">
                 <a href="#" className="btn btn-warning w-100">Thêm </a>
