@@ -9,12 +9,11 @@ function Navbar(props) {
     window.location.replace('/');
   }
   const dispatch = useDispatch();
-  const {brands,loading}= useSelector((state)=>state.brand);
-  const {cates}= useSelector((state)=> state.cate);
+  const {brands,loading1}= useSelector((state)=>state.brand);
+  const {cates,loading}= useSelector((state)=> state.cate);
   useEffect(()=>{
     dispatch(getBrand());
     dispatch(getCates());
-
   },[]);
   return (
     <div>

@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 import "../css/detail.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 function Detail() {
     const { id } = useParams();
     const baseURL = "https://students.trungthanhweb.com/api/single";
@@ -25,28 +27,7 @@ function Detail() {
             }
         });
     }
-    const options = {
-        loop: true,
-        center: true,
-        items: 3,
-        margin: 0,
-        autoplay: true,
-        dots: true,
-        autoplayTimeout: 8500,
-        smartSpeed: 450,
-        nav: false,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 3
-            },
-            1000: {
-                items: 3
-            }
-        }
-    };
+
     useEffect(() => {
         getData();
     }, [])
@@ -95,7 +76,18 @@ function Detail() {
                             </div>
                         </div>
                         <div className="row w-100">
-                            
+                            <Swiper
+                                spaceBetween={30}
+                                slidesPerView={5}
+                                onSlideChange={() => console.log('slide change')}
+                                onSwiper={(swiper) => console.log(swiper)}
+                            >
+                                <SwiperSlide>Slide 1</SwiperSlide>
+                                <SwiperSlide>Slide 2</SwiperSlide>
+                                <SwiperSlide>Slide 3</SwiperSlide>
+                                <SwiperSlide>Slide 4</SwiperSlide>
+                                ...
+                            </Swiper>
                         </div>
                         <div className="row mt-2 w-100">
 
