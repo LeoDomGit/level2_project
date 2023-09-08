@@ -1,6 +1,39 @@
 import React from 'react'
-
+import Swal from 'sweetalert2'
 function Product(props) {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1700,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+  const addToCart = (id)=>{
+      if(localStorage.getItem('cart') && localStorage.getItem('cart')!=null){
+        var arr=JSON.parse(localStorage.getItem('cart'));
+      }else{
+        var arr=[];
+      }
+      var check=false;
+      arr.forEach(el => {
+        if(el[0]==id){
+          el[1]++;
+          check=true;
+        }
+      });
+      if(check==false){
+        arr.push([id,1]);
+      }
+      localStorage.setItem('cart',JSON.stringify(arr));
+      Toast.fire({
+        icon: 'error',
+        title: 'Chưa nhập email'
+      })
+  }
   return (
     <div>
       <div className="row" >
@@ -16,7 +49,7 @@ function Product(props) {
                 <a href={`chitiet/${props.id}`} className="btn btn-primary w-100">Xem thêm</a>
               </div>
               <div className="col-md">
-                <a href="#" className="btn btn-warning w-100">Thêm </a>
+                <a href="#" className="btn btn-warning w-100" onClick={()=>addToCart(props.id)}>Thêm </a>
 
               </div>
             </div>
