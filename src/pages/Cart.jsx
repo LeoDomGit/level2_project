@@ -31,8 +31,9 @@ function Cart() {
             <Navbar />
             <div className="container-fluid px-5">
                 <div className="row w-100 mt-4">
+                <div className="col-md-6">
                     {carts && carts.length > 0 && (
-                        <div className="col-md-6">
+                        
                             <div className="table-responsive">
                                 <table className="table table-secondary">
                                     <thead className='table-dark'>
@@ -63,10 +64,12 @@ function Cart() {
                                     </tbody>
                                 </table>
                             </div>
-
-                        </div>
                     )}
+                        </div>
 
+                    <div className="col-md p-3">
+                        
+                    </div>
                 </div>
             </div>
         </div>
