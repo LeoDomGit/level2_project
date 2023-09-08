@@ -53,8 +53,10 @@ function Products() {
               </nav>
             </div> */}
             {limit<=count ?
-                        <div className="row">
-                        <button className='btn btn-primary' onClick={loadMore}>Xem thêm</button>
+                        <div className="row text-center">
+                          <div style={{'margin':'0px auto'}} className="col-md-3 text-center">
+                          <button className='btn btn-primary w-100' onClick={loadMore}>Xem thêm</button>
+                          </div>
                       </div>
             :
             ''
