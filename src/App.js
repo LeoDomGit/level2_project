@@ -9,7 +9,9 @@ import Todo2 from "./pages/Todo2";
 import Page404 from "./pages/Page404";
 import Logout from "./pages/Logout";
 import Detail from "./pages/Detail";
+import Cart from "./pages/Cart";
 
+import "./index.css";
 function App() {
 
   return (
@@ -23,6 +25,7 @@ function App() {
           <Route path="/todo1" element={<Todo1/>}/>
           <Route path="/todo2" element={<Todo2/>}/>
           <Route path="/chitiet/:id" element={<Detail />}/>
+          <Route path="/cart" element={<Cart/>}/>
           <Route path="/logout" element={<Logout/>}/>
           <Route path="*" element={<Page404/>}/>
         </Routes>
