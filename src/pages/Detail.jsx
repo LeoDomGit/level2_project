@@ -75,9 +75,18 @@ function Detail() {
                                     </tbody>
                                 </table>
                             </div>
+                            <br />
+                            <div className="row ms-0 mb-5">
+                                <div className="col-md">
+                                    <button className='btn btn-success w-100'>Thêm vào giỏ hàng</button>
+                                </div>
+                                <div className="col-md">
+                                    <button className='btn btn-warning  w-100 '>Trả góp</button>
+                                </div>
+                            </div>
                         </div>
                         <div className="row">
-                            <div className="col-md-7">
+                            <div className="col-md-6">
                                 <h4>Sản phẩm cùng thương hiệu</h4>
                             <Swiper
                                 spaceBetween={30}
@@ -94,6 +103,23 @@ function Detail() {
                             
                             </Swiper>
                             </div>
+                            <div className="col-md-6">
+                                <h4>Sản phẩm cùng loại</h4>
+                            <Swiper
+                                spaceBetween={30}
+                                slidesPerView={3}
+                                onSlideChange={() => console.log('slide change')}
+                                onSwiper={(swiper) => console.log(swiper)}
+                            >
+                                {cateProducts && cateProducts.length>0 && cateProducts.map((item)=>
+                                    <SwiperSlide>
+                                        <ProductRelate name={item.name} image={image+item.image} id={item.id} price={item.price}/>
+                                    </SwiperSlide>
+                                )}
+                                
+                            
+                            </Swiper>
+                            </div>      
                         </div>
                         <div className="row mt-2 w-100">
 
