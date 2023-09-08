@@ -11,25 +11,35 @@ export const taskSlice = createSlice({
     initialState,
     reducers: {
         addTask: (state, action) => {
-            console.log(action.payload);
+            console.log(action.payload.note);
             state.task.push(action.payload);
+            var data = new URLSearchParams();
+            data.append('apitoken', localStorage.getItem('token'));
+            data.append('todo', action.payload.note);
+            fetch('https://students.trungthanhweb.com/api/todo', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": 'application/x-www-form-urlencoded'
+                        },
+                        body: data,
+            });
         },
         editTask: (state, action) => {
             state.task.forEach(el => {
                 if (el.id === action.payload.id) {
                     el.note = action.payload.todo;
                     el.status = false;
-                    // var data = new URLSearchParams();
-                    // data.append('apitoken', localStorage.getItem('token'));
-                    // data.append('todo', action.payload.todo);
-                    // data.append('id', action.payload.id);
-                    // fetch('https://students.trungthanhweb.com/api/updatetodo', {
-                    //     method: "POST",
-                    //     headers: {
-                    //         "Content-Type": 'application/x-www-form-urlencoded'
-                    //     },
-                    //     body: data,
-                    // });
+                    var data = new URLSearchParams();
+                    data.append('apitoken', localStorage.getItem('token'));
+                    data.append('todo', action.payload.todo);
+                    data.append('id', action.payload.id);
+                    fetch('https://students.trungthanhweb.com/api/updatetodo', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": 'application/x-www-form-urlencoded'
+                        },
+                        body: data,
+                    });
                 }
 
             });
@@ -38,7 +48,16 @@ export const taskSlice = createSlice({
             state.task.forEach(el => {
                 if (el.id === action.payload) {
                     el.status = true
-                    console.log(state.task);
+                    var data = new URLSearchParams();
+                    data.append('id', action.payload);
+                    data.append('apitoken', localStorage.getItem('token'));
+                    fetch('https://students.trungthanhweb.com/api/statusTodo', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": 'application/x-www-form-urlencoded'
+                        },
+                        body: data,
+                    });
                 }
 
             });
@@ -46,16 +65,16 @@ export const taskSlice = createSlice({
         deleteTaskSlice: (state, action) => {
             console.log(action.payload);
             state.task = state.task.filter((ỉtem) => ỉtem.id !== action.payload);
-            // var data = new URLSearchParams();
-            // data.append('apitoken', localStorage.getItem('token'));
-            // data.append('id', action.payload);
-            // fetch('https://students.trungthanhweb.com/api/deletetodo', {
-            //     method: "POST",
-            //     headers: {
-            //         "Content-Type": 'application/x-www-form-urlencoded'
-            //     },
-            //     body: data,
-            // });
+            var data = new URLSearchParams();
+            data.append('apitoken', localStorage.getItem('token'));
+            data.append('id', action.payload);
+            fetch('https://students.trungthanhweb.com/api/deletetodo', {
+                method: "POST",
+                headers: {
+                    "Content-Type": 'application/x-www-form-urlencoded'
+                },
+                body: data,
+            });
         }
 
     },
