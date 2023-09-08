@@ -1,6 +1,20 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 export const getCart = createAsyncThunk('carts/getCart' , async ()=>{
-    return fetch("https://students.trungthanhweb.com/api/home?apitoken="+localStorage.getItem('token'))
+    var id = JSON.parse(localStorage.getItem('cart'));
+    var token='';
+    if(localStorage.getItem('token') && localStorage.getItem('token')!=null){
+        token=localStorage.getItem('token')
+    }
+    var data = new URLSearchParams();
+    data.append('apitoken', localStorage.getItem('token'));
+    data.append('id', JSON.stringify(id));
+    return fetch("https://students.trungthanhweb.com/api/getCart", {
+        method: "POST",
+        headers: {
+            "Content-Type": 'application/x-www-form-urlencoded'
+        },
+        body:data
+    })
     .then((res)=>res.json());
 })
 export const cartSlice = createSlice({
@@ -15,7 +29,7 @@ export const cartSlice = createSlice({
         },
         [getCart.fulfilled]:(state,action)=>{
             state.loading2=false;
-            state.carts= action.payload.carts
+            state.carts= action.payload.result
         },
         [getCart.rejected]:(state,action)=>{
             state.loading2=false;

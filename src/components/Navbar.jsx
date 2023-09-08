@@ -64,7 +64,7 @@ function Navbar(props) {
       <form className="d-flex">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
         <button className="btn btn-outline-success" type="submit">Search</button>
-        <a href={'/cart'} className="ms-2 btn btn-outline-warning"><i class="bi bi-bag-check-fill"></i></a>
+        <a href={'/cart'} className="ms-2 btn btn-outline-warning"><i className="bi bi-bag-check-fill"></i></a>
       </form>
     </div>
   </div>

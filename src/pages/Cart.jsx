@@ -1,27 +1,24 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
-import axios from 'axios';
+import { getCart } from "../redux/cartSlice";
+// import { getCates } from "../redux/cateSlice";
 function Cart() {
-    const [cart, setCart] = useState([]);
-    useEffect(() => {
-        const id = JSON.parse(localStorage.getItem('cart'));
-        const result = axios.get('https://students.trungthanhweb.com/api/getCart', {
-            params: {
-                id: id,
-                apitoken: localStorage.getItem('token')
-            }
-        }).then((res) => setCart(res.data.result));
-    }, [])
+    const dispatch = useDispatch();
+    const {carts,loading}= useSelector((state)=> state.carts);
+    useEffect(()=>{
+        dispatch(getCart())
+      },[]);
     return (
         <div>
             <Navbar />
             <div className="container-fluid px-5">
                 <div className="row w-100 mt-4">
-                    {cart && cart.length > 0 && (
+                    {carts && carts.length > 0 && (
                         <div className="col-md-6">
                             <div className="table-responsive">
-                                <table className="table table-primary">
-                                    <thead>
+                                <table className="table table-secondary">
+                                    <thead className='table-dark'>
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Hình ảnh </th>
@@ -34,8 +31,8 @@ function Cart() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {cart.map((item,index) =>
-                                            <tr className="">
+                                        {carts.map((item,index) =>
+                                            <tr key={index} className="">
                                                 <td scope="row">{++index}</td>
                                                 <td><img style={{'width':'100px'}} src={item[3]}alt="" /></td>
                                                 <td className='text-left align-middle'>{item[1]}</td>
