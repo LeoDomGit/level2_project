@@ -6,6 +6,7 @@ import "../css/detail.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import ProductRelate from "../components/ProductRelate";
 import 'swiper/css';
 function Detail() {
     const { id } = useParams();
@@ -75,19 +76,24 @@ function Detail() {
                                 </table>
                             </div>
                         </div>
-                        <div className="row w-100">
+                        <div className="row">
+                            <div className="col-md-7">
+                                <h4>Sản phẩm cùng thương hiệu</h4>
                             <Swiper
                                 spaceBetween={30}
-                                slidesPerView={5}
+                                slidesPerView={3}
                                 onSlideChange={() => console.log('slide change')}
                                 onSwiper={(swiper) => console.log(swiper)}
                             >
+                                {brandProducts && brandProducts.length>0 && brandProducts.map((item)=>
+                                    <SwiperSlide>
+                                        <ProductRelate name={item.name} image={image+item.image} id={item.id} price={item.price}/>
+                                    </SwiperSlide>
+                                )}
                                 
-                                <SwiperSlide>
-                                    
-                                </SwiperSlide>
                             
                             </Swiper>
+                            </div>
                         </div>
                         <div className="row mt-2 w-100">
 

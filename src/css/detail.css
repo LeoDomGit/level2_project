@@ -1,3 +1,6 @@
 .mainProduct{
     width: 100%;
 }
+.carousel .slide img {
+    width:60% !important;
+}
