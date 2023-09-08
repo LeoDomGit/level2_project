@@ -26,7 +26,7 @@ function Product(props) {
         }
       });
       if(check==false){
-        arr.push([id,1]);
+        arr.push([Number(id),1]);
       }
       localStorage.setItem('cart',JSON.stringify(arr));
       Toast.fire({
