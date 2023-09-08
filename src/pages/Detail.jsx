@@ -28,7 +28,9 @@ function Detail() {
             }
         });
     }
-
+    const addTocart = ()=>{
+        
+    }
     useEffect(() => {
         getData();
     }, [])
@@ -78,7 +80,7 @@ function Detail() {
                             <br />
                             <div className="row ms-0 mb-5">
                                 <div className="col-md">
-                                    <button className='btn btn-success w-100'>Thêm vào giỏ hàng</button>
+                                    <button className='btn btn-success w-100' onClick={()=>addTocart()}>Thêm vào giỏ hàng</button>
                                 </div>
                                 <div className="col-md">
                                     <button className='btn btn-warning  w-100 '>Trả góp</button>
