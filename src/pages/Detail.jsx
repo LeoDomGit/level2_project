@@ -41,34 +41,34 @@ function Detail() {
                     <div className="ps-3 col-md-4">
                         <Carousel showStatus={false} showArrows={true}>
                             {gallery && gallery.map((item) =>
-                                <div>
-                                    <img src={item} />
+                                <div key={item.id}>
+                                    <img  src={item} />
                                 </div>
                             )}
                         </Carousel>
                     </div>
                     <div className="col-md-8 pt-5">
                         <div className="row w-50">
-                            <div class="table-responsive">
-                                <table class="table table-primary">
+                            <div className="table-responsive">
+                                <table className="table table-primary">
                                     <tbody>
-                                        <tr class="">
+                                        <tr className="">
                                             <td scope="row">Tên sản phẩm </td>
                                             <td>{product.name}</td>
                                         </tr>
-                                        <tr class="">
+                                        <tr className="">
                                             <td scope="row">Giá</td>
                                             <td>{Intl.NumberFormat('en-US').format(Number(product.price))}</td>
                                         </tr>
-                                        <tr class="">
+                                        <tr className="">
                                             <td scope="row">Giảm giá</td>
                                             <td><b>{product.discount}%</b></td>
                                         </tr>
-                                        <tr class="">
+                                        <tr className="">
                                             <td scope="row">Thương hiệu</td>
                                             <td><b>{product.brandname}</b></td>
                                         </tr>
-                                        <tr class="">
+                                        <tr className="">
                                             <td scope="row">Loại sản phẩm</td>
                                             <td><b>{product.catename}</b></td>
                                         </tr>
@@ -92,11 +92,10 @@ function Detail() {
                                 spaceBetween={30}
                                 slidesPerView={3}
                                 onSlideChange={() => console.log('slide change')}
-                                onSwiper={(swiper) => console.log(swiper)}
                             >
                                 {brandProducts && brandProducts.length>0 && brandProducts.map((item)=>
                                     <SwiperSlide>
-                                        <ProductRelate name={item.name} image={image+item.image} id={item.id} price={item.price}/>
+                                        <ProductRelate key={item.id} name={item.name} image={image+item.image} id={item.id} price={item.price}/>
                                     </SwiperSlide>
                                 )}
                                 
@@ -109,11 +108,10 @@ function Detail() {
                                 spaceBetween={30}
                                 slidesPerView={3}
                                 onSlideChange={() => console.log('slide change')}
-                                onSwiper={(swiper) => console.log(swiper)}
                             >
                                 {cateProducts && cateProducts.length>0 && cateProducts.map((item)=>
                                     <SwiperSlide>
-                                        <ProductRelate name={item.name} image={image+item.image} id={item.id} price={item.price}/>
+                                        <ProductRelate key={item.id} name={item.name} image={image+item.image} id={item.id} price={item.price}/>
                                     </SwiperSlide>
                                 )}
                                 
@@ -122,7 +120,7 @@ function Detail() {
                             </div>      
                         </div>
                         <div className="row mt-2 w-100">
-
+                                    
                         </div>
                     </div>
                 </div>
