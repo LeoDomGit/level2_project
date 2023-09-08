@@ -121,6 +121,7 @@ function Detail() {
                             </div>
                         </div>
                         <div className="row">
+                            {brandProducts && brandProducts.length>0 &&
                             <div className="col-md-6">
                                 <h4>Sản phẩm cùng thương hiệu</h4>
                             <Swiper
@@ -128,7 +129,7 @@ function Detail() {
                                 slidesPerView={3}
                                 onSlideChange={() => console.log('slide change')}
                             >
-                                {brandProducts && brandProducts.length>0 && brandProducts.map((item)=>
+                                { brandProducts.map((item)=>
                                     <SwiperSlide>
                                         <ProductRelate key={item.id} name={item.name} image={image+item.image} id={item.id} price={item.price}/>
                                     </SwiperSlide>
@@ -137,6 +138,8 @@ function Detail() {
                             
                             </Swiper>
                             </div>
+                            }
+                            {cateProducts && cateProducts.length>0 && 
                             <div className="col-md-6">
                                 <h4>Sản phẩm cùng loại</h4>
                             <Swiper
@@ -144,7 +147,7 @@ function Detail() {
                                 slidesPerView={3}
                                 onSlideChange={() => console.log('slide change')}
                             >
-                                {cateProducts && cateProducts.length>0 && cateProducts.map((item)=>
+                                { cateProducts.map((item)=>
                                     <SwiperSlide>
                                         <ProductRelate key={item.id} name={item.name} image={image+item.image} id={item.id} price={item.price}/>
                                     </SwiperSlide>
@@ -153,6 +156,7 @@ function Detail() {
                             
                             </Swiper>
                             </div>      
+                            }
                         </div>
                         <div className="row mt-2 w-100">
                                     
