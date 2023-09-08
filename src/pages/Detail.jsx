@@ -7,9 +7,45 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ProductRelate from "../components/ProductRelate";
+import Swal from 'sweetalert2'
+
 import 'swiper/css';
 function Detail() {
-    const { id } = useParams();
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1700,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      const { id } = useParams();
+      const addTocart = ()=>{
+        if(localStorage.getItem('cart') && localStorage.getItem('cart')!=null){
+          var arr=JSON.parse(localStorage.getItem('cart'));
+        }else{
+          var arr=[];
+        }
+        var check=false;
+        arr.forEach(el => {
+          if(el[0]==id){
+            el[1]++;
+            check=true;
+          }
+        });
+        if(check==false){
+          arr.push([Number(id),1]);
+        }
+        localStorage.setItem('cart',JSON.stringify(arr));
+        Toast.fire({
+          icon: 'success',
+          title: 'Đã thêm thành công'
+        })
+    }
+
     const baseURL = "https://students.trungthanhweb.com/api/single";
     const token = localStorage.getItem('token');
     const [product, setProduct] = useState({});
@@ -27,9 +63,6 @@ function Detail() {
                 setGallery(res.data.gallery)
             }
         });
-    }
-    const addTocart = ()=>{
-        
     }
     useEffect(() => {
         getData();
