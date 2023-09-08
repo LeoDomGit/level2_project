@@ -1,11 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
-import { getCart } from "../redux/cartSlice";
-// import { getCates } from "../redux/cateSlice";
+import { getCart,deleteItem } from "../redux/cartSlice";
+import Swal from 'sweetalert2'
 function Cart() {
     const dispatch = useDispatch();
     const {carts,loading}= useSelector((state)=> state.carts);
+    const deleteCart = (i)=>{
+        Swal.fire({
+            icon:'question',
+            text: 'Bạn muốn xóa sản phẩm ?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Đúng',
+            denyButtonText: `Không`,
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                dispatch(deleteItem(i));
+            } else if (result.isDenied) {
+            }
+          })
+
+    }
     useEffect(()=>{
         dispatch(getCart())
       },[]);
@@ -34,12 +51,12 @@ function Cart() {
                                         {carts.map((item,index) =>
                                             <tr key={index} className="">
                                                 <td scope="row">{++index}</td>
-                                                <td><img style={{'width':'100px'}} src={item[3]}alt="" /></td>
-                                                <td className='text-left align-middle'>{item[1]}</td>
+                                                <td><a href={`/chitiet/${item[0]}`}><img style={{'width':'100px'}} src={item[3]}alt="" /></a></td>
+                                                <td className='text-left align-middle'><a style={{"textDecoration":"none"}} href={`/chitiet/${item[0]}`}>{item[1]}</a></td>
                                                 <td className='text-left align-middle'>{Intl.NumberFormat('en-US').format(item[5])}</td>
                                                 <td className='text-left align-middle'>{item[4]}</td>
                                                 <td className='text-left align-middle'>{Intl.NumberFormat('en-US').format(item[6])}</td>
-                                                <td className='text-left align-middle'><button className='btn btn-danger btn-sm'>Xóa</button></td>
+                                                <td className='text-left align-middle'><button className='btn btn-danger btn-sm' onClick={()=>deleteCart(item[0])}>Xóa</button></td>
                                             </tr>
                                         )}
 

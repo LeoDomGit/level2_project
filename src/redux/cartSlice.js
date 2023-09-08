@@ -23,6 +23,12 @@ export const cartSlice = createSlice({
         carts:[],
         loading2:false
     },
+    reducers:{
+        deleteItem : (state,action)=>{
+            state.carts= state.carts.filter((item)=>item[0] !== action.payload);
+            localStorage.setItem('cart',JSON.stringify(state.carts));
+        }
+    },
     extraReducers:{
         [getCart.pending]: (state,action)=>{
             state.loading2=true;
@@ -36,4 +42,6 @@ export const cartSlice = createSlice({
         }
     }
 })
+export const {deleteItem} = cartSlice.actions;
+
 export default cartSlice.reducer
