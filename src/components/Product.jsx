@@ -30,8 +30,8 @@ function Product(props) {
       }
       localStorage.setItem('cart',JSON.stringify(arr));
       Toast.fire({
-        icon: 'error',
-        title: 'Chưa nhập email'
+        icon: 'success',
+        title: 'Đã thêm thành công'
       })
   }
   return (
