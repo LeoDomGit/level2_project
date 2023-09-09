@@ -2,10 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
 import { getCart,deleteItem } from "../redux/cartSlice";
+import { getProducts } from "../redux/productsSlice";
 import Swal from 'sweetalert2'
 function Cart() {
     const dispatch = useDispatch();
     const {carts,loading}= useSelector((state)=> state.carts);
+    const [id,setID]=useState(21);
+    const {products,loadingP} = useSelector((state)=>state.products);
+    // const [product,setProduct]= useState({});
+    const [name,setName]= useState('');
+    const [address,setAddress]= useState('');
+    const [phone,setPhone]= useState('');
     const deleteCart = (i)=>{
         Swal.fire({
             icon:'question',
@@ -23,8 +30,14 @@ function Cart() {
           })
 
     }
+    const submitBill = ()=>{
+            if(name==''||address==''||phone==''){
+                
+            }
+    }
     useEffect(()=>{
         dispatch(getCart())
+        dispatch(getProducts())
       },[]);
     return (
         <div>
@@ -65,10 +78,26 @@ function Cart() {
                                 </table>
                             </div>
                     )}
-                        </div>
+                </div>
 
-                    <div className="col-md p-3">
-                        
+                    <div className="col-md p-3 border rounded" style={{'height':'160px','background':'#ebebeb'}}>
+                        <div className="row" >
+                            <div className="col-md">
+                                <label htmlFor="">Tên người nhận</label>
+                                <input type="text"  className='form-control' onChange={(e)=>setName(e.target.value)}  placeholder='Tên người nhận' />
+                            </div>
+                            <div className="col-md ">
+                            <label htmlFor="">Địa chỉ </label>
+                                <input type="text" className='form-control' onChange={(e)=>setAddress(e.target.value)} placeholder='Địa chỉ' />
+                            </div>
+                            <div className="col-md">
+                            <label htmlFor="">Địa chỉ</label>
+                                <input type="text" className='form-control' onChange={(e)=>setPhone(e.target.value)} placeholder='Số điện thoại' />
+                            </div>
+                            <div className="col-md">
+                                    <button className='btn btn-primary mt-4' onClick={submitBill}>Chốt đơn</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

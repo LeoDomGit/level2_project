@@ -13,7 +13,7 @@ export const store = configureStore({
         cate:cateReducer,
         task1:taskReducer1,
         carts:cartSlice,
-        products:productsSlice
+        products:productsSlice,
 
     }
 })
