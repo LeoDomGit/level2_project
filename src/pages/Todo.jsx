@@ -52,7 +52,6 @@ function Todo() {
                 }).then(()=>{
                     setItem('')
                     getTodo();
-    
                 })
             }
         }
