@@ -18,6 +18,7 @@ function Cart() {
     const validate = (e) => {
         if(e.match(validPhone)){
             setPhoneErr(0);
+            setPhone(e)
         }else{
             setPhoneErr(1);
         }
