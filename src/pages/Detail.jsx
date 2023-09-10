@@ -8,7 +8,8 @@ import { Carousel } from 'react-responsive-carousel';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ProductRelate from "../components/ProductRelate";
 import Swal from 'sweetalert2'
-
+import DOMPurify from "dompurify";
+import parse from "html-react-parser";
 import 'swiper/css';
 function Detail() {
     const Toast = Swal.mixin({
@@ -65,6 +66,11 @@ function Detail() {
             }
         });
     }
+    const detail =product.content;
+    const detailclean = DOMPurify.sanitize(detail, {
+        USE_PROFILES: { html: true },
+      });
+      console.log(detailclean);
     useEffect(() => {
         getData();
     }, [])
@@ -160,7 +166,7 @@ function Detail() {
                             }
                         </div>
                         <div className="row mt-2 w-100">
-                                    
+                                {parse(detailclean)}
                         </div>
                     </div>
                 </div>
