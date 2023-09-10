@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from "../components/Navbar";
 import Swal from 'sweetalert2'
 import { addTask, selectTask, editTask, finishtask, deleteTaskSlice,getTodo } from "../redux/todoSlice1";
@@ -90,7 +90,7 @@ function Todo2() {
             })
         } else {
             var item1 = new Object();
-            item1.id = Date.now();
+            item1.id = Date.now(); //Timestamp : int
             item1.note = item;
             item1.status = false;
             dispatch(addTask(item1))
@@ -116,6 +116,8 @@ function Todo2() {
             })
         }
     }
+    // useEffect(()=>{
+    // },[])
     return (
         <div >
             <Navbar />
