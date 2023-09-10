@@ -12,7 +12,17 @@ function Cart() {
     // const [product,setProduct]= useState({});
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
+    const [phoneerr, setPhoneErr] = useState(1);
     const [phone, setPhone] = useState('');
+    const validPhone =/(0[3|5|7|8|9])+([0-9]{8})\b/g
+    const validate = (e) => {
+        if(e.match(validPhone)){
+            setPhoneErr(0);
+        }else{
+            setPhoneErr(1);
+        }
+     };
+     console.log(phoneerr);
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -99,15 +109,15 @@ function Cart() {
                         <div className="row" >
                             <div className="col-md">
                                 <label htmlFor="">Tên người nhận</label>
-                                <input type="text" className={`form-control ${name==''?'border border-danger':''}`} onChange={(e) => setName(e.target.value)} placeholder='Tên người nhận' />
+                                <input type="text" className={`form-control ${name == '' ? 'border border-danger' : ''}`} onChange={(e) => setName(e.target.value)} placeholder='Tên người nhận' />
                             </div>
                             <div className="col-md ">
                                 <label htmlFor="">Địa chỉ </label>
-                                <input type="text" className={`form-control ${address==''?'border border-danger':''}`} onChange={(e) => setAddress(e.target.value)} placeholder='Địa chỉ' />
+                                <input type="text" className={`form-control ${address == '' ? 'border border-danger' : ''}`} onChange={(e) => setAddress(e.target.value)} placeholder='Địa chỉ' />
                             </div>
                             <div className="col-md">
                                 <label htmlFor="">Điện thoại</label>
-                                <input type="text" pattern="/(0[3|5|7|8|9])+([0-9]{8})\b/g" className={`form-control ${phone==''?'border border-danger':''}`} onChange={(e) => setPhone(e.target.value)} placeholder='Số điện thoại' />
+                                <input type="text" className={`form-control ${phoneerr ==1 ? 'border border-danger' : ''}`} onKeyUp={(e) => validate(e.target.value)} placeholder='Số điện thoại' />
                             </div>
                             <div className="col-md">
                                 <button className={`btn btn-primary mt-4`} onClick={submitBill}>Chốt đơn</button>
