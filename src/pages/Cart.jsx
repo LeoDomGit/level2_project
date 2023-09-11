@@ -3,24 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
 import { getCart, deleteItem } from "../redux/cartSlice";
 import { getProducts } from "../redux/productsSlice";
+import "../css/cart.css";
 import Swal from 'sweetalert2'
 function Cart() {
     const dispatch = useDispatch();
-    const  {carts,loading2} = useSelector((state) => state.carts);
-    const [cart,setcart]= useState([]);
+    const { carts, loading2 } = useSelector((state) => state.carts);
+    const [cart, setcart] = useState([]);
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [phoneerr, setPhoneErr] = useState(1);
     const [phone, setPhone] = useState('');
-    const validPhone =/(0[3|5|7|8|9])+([0-9]{8})\b/g
+    const validPhone = /(0[3|5|7|8|9])+([0-9]{8})\b/g
+    console.log(carts);
     const validate = (e) => {
-        if(e.match(validPhone)){
+        if (e.match(validPhone)) {
             setPhoneErr(0);
             setPhone(e)
-        }else{
+        } else {
             setPhoneErr(1);
         }
-     };
+    };
 
     const Toast = Swal.mixin({
         toast: true,
@@ -56,42 +58,39 @@ function Cart() {
                 icon: 'error',
                 title: 'Thiếu thông tin nhận hàng'
             })
-        }else{
+        } else {
             var data = new URLSearchParams();
             var cart = JSON.parse(localStorage.getItem('cart'));
-            data.append('apitoken',localStorage.getItem('token'));
-            data.append('tenKH',name);
-            data.append('phone',phone);
-            data.append('address',phone);
-            data.append('cart',JSON.stringify(cart));
+            data.append('apitoken', localStorage.getItem('token'));
+            data.append('tenKH', name);
+            data.append('phone', phone);
+            data.append('address', phone);
+            data.append('cart', JSON.stringify(cart));
             fetch('https://students.trungthanhweb.com/api/createBill', {
-                method:"POST",
+                method: "POST",
                 headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: data
-            }).then((res)=>res.json()).then((res)=>{
-                if(res.check==true){
-                        Toast.fire({
-                    icon: 'success',
-                    title: 'Đặt hàng thành công'
-                }).then(()=>{
-                    localStorage.removeItem('cart')
-                    window.location.replace('/products');
-                })
-                }else{
-                   
+            }).then((res) => res.json()).then((res) => {
+                if (res.check == true) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Đặt hàng thành công'
+                    }).then(() => {
+                        localStorage.removeItem('cart')
+                        window.location.replace('/products');
+                    })
+                } else {
+
                 }
             })
         }
     }
     useEffect(() => {
-        if(!localStorage.getItem('cart')||localStorage.getItem('cart')==null){
-            window.location.replace('/products');
-        }else{
-            dispatch(getCart())
-            dispatch(getProducts())
-        }
+
+        dispatch(getCart())
+        dispatch(getProducts())
 
     }, []);
     return (
@@ -134,30 +133,59 @@ function Cart() {
                             </div>
                         )}
                     </div>
-                     {loading2?
+                    {loading2 || cart.length == 0 ?
                         ''
-                     :
-                     <div className="col-md p-3 border rounded" style={{ 'height': '160px', 'background': '#ebebeb' }}>
-                                     <div className="row" >
-                                         <div className="col-md">
-                                             <label htmlFor="">Tên người nhận</label>
-                                             <input type="text" className={`form-control ${name == '' ? 'border border-danger' : ''}`} onChange={(e) => setName(e.target.value)} placeholder='Tên người nhận' />
-                                         </div>
-                                         <div className="col-md ">
-                                             <label htmlFor="">Địa chỉ </label>
-                                             <input type="text" className={`form-control ${address == '' ? 'border border-danger' : ''}`} onChange={(e) => setAddress(e.target.value)} placeholder='Địa chỉ' />
-                                         </div>
-                                         <div className="col-md">
-                                             <label htmlFor="">Điện thoại</label>
-                                             <input type="text" className={`form-control ${phoneerr ==1 ? 'border border-danger' : ''}`} onKeyUp={(e) => validate(e.target.value)} placeholder='Số điện thoại' />
-                                         </div>
-                                         <div className="col-md">                     
-                                             <button className={`btn btn-primary mt-4` }   onClick={submitBill}>Chốt đơn</button>
-                                         </div>
-                                     </div>
-                                 </div>
-                     }                           
-    
+                        :
+                        <div className="col-md p-3 border rounded" style={{ 'height': '160px', 'background': '#ebebeb' }}>
+                            <div className="row" >
+                                <div className="col-md">
+                                    <label htmlFor="">Tên người nhận</label>
+                                    <input type="text" className={`form-control ${name == '' ? 'border border-danger' : ''}`} onChange={(e) => setName(e.target.value)} placeholder='Tên người nhận' />
+                                </div>
+                                <div className="col-md ">
+                                    <label htmlFor="">Địa chỉ </label>
+                                    <input type="text" className={`form-control ${address == '' ? 'border border-danger' : ''}`} onChange={(e) => setAddress(e.target.value)} placeholder='Địa chỉ' />
+                                </div>
+                                <div className="col-md">
+                                    <label htmlFor="">Điện thoại</label>
+                                    <input type="text" className={`form-control ${phoneerr == 1 ? 'border border-danger' : ''}`} onKeyUp={(e) => validate(e.target.value)} placeholder='Số điện thoại' />
+                                </div>
+                                <div className="col-md">
+                                    <button className={`btn btn-primary mt-4`} onClick={submitBill}>Chốt đơn</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div className="container">
+                    <div className="row">
+                        {carts && carts.length == 0 && (
+
+                            <div className="table-responsive">
+                                <table className="table table-secondary">
+                                    <thead className='table-dark'>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Hình ảnh </th>
+                                            <th scope="col">Tên sản phẩm</th>
+                                            <th scope="col">Giá</th>
+                                            <th scope="col">Số lượng</th>
+                                            <th scope="col">Thành tiền</th>
+                                            <th scope="col">Xóa</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td scope="row" colSpan={7}><b>Chưa có giỏ hàng </b></td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

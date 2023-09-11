@@ -57,7 +57,6 @@ function Detail() {
 
     const getData = () => {
         axios.get(`${baseURL}?apitoken=${token}&id=${id}`).then((res) => {
-            console.log(res);
             if (res.data) {
                 setBrandProducts(res.data.brandproducts);
                 setCateProducts(res.data.cateproducts);
