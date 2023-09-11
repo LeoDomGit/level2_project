@@ -13,8 +13,12 @@ function Cart() {
     const [address, setAddress] = useState('');
     const [phoneerr, setPhoneErr] = useState(1);
     const [phone, setPhone] = useState('');
-    const validPhone = /(0[3|5|7|8|9])+([0-9]{8})\b/g
-    console.log(carts);
+    const [count, setCount] = useState(0);
+    const [limit, setLimit] = useState(4);
+    const [bills, setBill] = useState([]);
+    const validPhone = /(0[3|5|7|8|9])+([0-9]{8})\b/g;
+    const [idBill, setidBill] = useState(0);
+    const [billdetail, setbillDetail] = useState([]);
     const validate = (e) => {
         if (e.match(validPhone)) {
             setPhoneErr(0);
@@ -23,7 +27,6 @@ function Cart() {
             setPhoneErr(1);
         }
     };
-
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -51,6 +54,14 @@ function Cart() {
             }
         })
 
+    }
+    const getBill = async () => {
+        fetch('https://students.trungthanhweb.com/api/bills1?apitoken=' + localStorage.getItem('token') + '&limit=' + limit)
+            .then((res) => res.json()).then((res) => {
+                setCount(res.count)
+                setBill(res.bills)
+
+            })
     }
     const submitBill = async () => {
         if (name == '' || address == '' || phone == '') {
@@ -87,8 +98,22 @@ function Cart() {
             })
         }
     }
+    const getDetailBill = async (id) => {
+        setidBill(id);
+        if (idBill != 0) {
+            const response = await fetch('https://students.trungthanhweb.com/api/singlebill?apitoken=' + localStorage.getItem('token') + '&id=' + id)
+                .then(res => res.json()).then((res) => {
+                    if (res.check == true) {
+                        setbillDetail(res.result);
+                    }
+                })
+        }
+    }
     useEffect(() => {
-
+        if (!localStorage.getItem('token') || localStorage.getItem('token') == null) {
+            window.location.replace('/login');
+        }
+        getBill();
         dispatch(getCart())
         dispatch(getProducts())
 
@@ -158,7 +183,7 @@ function Cart() {
                     }
 
                 </div>
-                <div className="container">
+                {/* <div className="container">
                     <div className="row">
                         {carts && carts.length == 0 && (
 
@@ -186,7 +211,64 @@ function Cart() {
                             </div>
                         )}
                     </div>
-                </div>
+                </div> */}
+                {bills && bills.length > 0 && cart.length == 0 &&
+                    <div className="container-fluid px-5 mt-3">
+                        <div className="row w-100">
+                            <div className="col-md-4">
+                                <ul className="list-group">
+                                    {bills.map((item, index) =>
+
+                                        <li key={index} onClick={(e) => getDetailBill(item.id)} className={`pointer list-group-item bills ${item.id == idBill ? 'active' : ''}`}>
+                                            <h5>Tên khách hàng : {item.tenKH}</h5>
+                                            <h5>Số điện thoại : {item.phone}</h5>
+                                            <p>Địa chỉ : {item.address}</p>
+                                        </li>
+                                    )}
+
+
+                                </ul>
+                            </div>
+                            {billdetail && billdetail.length > 0 &&
+                                <div className="col-md">
+                                    <div className="table-responsive">
+                                        <table className="table table-light border">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col border">#</th>
+                                                    <th scope="col border">Hình ảnh</th>
+                                                    <th scope="col border">Tên sản phẩm</th>
+                                                    <th scope="col border">Số lượng</th>
+                                                    <th scope="col border">Đơn giá</th>
+                                                    <th scope="col border">Thành tiền</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {billdetail.map((item,index)=>
+                                                <tr className="">
+                                                <td scope="row">{++index}</td>
+                                                <td>
+                                                    <img style={{'width':'100px'}} src={`https://students.trungthanhweb.com/images/${item.image}`} alt="" />
+                                                </td>
+                                                <td>{item.productname}</td>
+                                                <td>{item.qty}</td>
+                                                <td>{Intl.NumberFormat('en-US').format(Number(item.price))}</td>
+                                                <td>{Intl.NumberFormat('en-US').format(Number(item.price)*Number(item.qty))}</td>
+
+                                            </tr>
+
+                                                )}
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     )
