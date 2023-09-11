@@ -9,6 +9,7 @@ function Cateproduct() {
     const dispatch = useDispatch();
     const {products,loadingP}= useSelector((state) => state.products);
     console.log(products);
+    
     useEffect(()=>{
         dispatch(getProducts())
     },[])
