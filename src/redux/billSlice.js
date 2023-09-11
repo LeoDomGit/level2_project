@@ -15,6 +15,7 @@ export const billSlice = createSlice({
     initialState:{
         bills:[],
         loading3:false,
+        
     },
     extraReducers:{
         [getBill.pending]:(state,action)=>{

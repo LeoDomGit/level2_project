@@ -19,6 +19,7 @@ function Cart() {
     const validPhone = /(0[3|5|7|8|9])+([0-9]{8})\b/g;
     const [idBill, setidBill] = useState(0);
     const [billdetail, setbillDetail] = useState([]);
+    const [total, setTotal]= useState(0);
     const validate = (e) => {
         if (e.match(validPhone)) {
             setPhoneErr(0);
@@ -99,14 +100,27 @@ function Cart() {
         }
     }
     const getDetailBill = async (id) => {
-        setidBill(id);
+        setidBill(id);  
+
         if (idBill != 0) {
             const response = await fetch('https://students.trungthanhweb.com/api/singlebill?apitoken=' + localStorage.getItem('token') + '&id=' + id)
                 .then(res => res.json()).then((res) => {
                     if (res.check == true) {
+                        
+                        var sum=0;
                         setbillDetail(res.result);
+                        res.result.forEach(el => {
+                            sum+=(Number(el.price)*Number(el.qty));
+                        });
+                        setTotal(sum)
                     }
                 })
+        }
+    }
+    const updateLimit = ()=>{
+        setLimit(limit+4);
+        if(limit<count){
+            getBill()            
         }
     }
     useEffect(() => {
@@ -219,7 +233,7 @@ function Cart() {
                                 <ul className="list-group">
                                     {bills.map((item, index) =>
 
-                                        <li key={index} onClick={(e) => getDetailBill(item.id)} className={`pointer list-group-item bills ${item.id == idBill ? 'active' : ''}`}>
+                                        <li key={index} onClick={(e) => getDetailBill(item.id)} className={`pointer list-group-item bills ${item.id == idBill   ? 'active' : ''}`}>
                                             <h5>Tên khách hàng : {item.tenKH}</h5>
                                             <h5>Số điện thoại : {item.phone}</h5>
                                             <p>Địa chỉ : {item.address}</p>
@@ -228,6 +242,11 @@ function Cart() {
 
 
                                 </ul>
+                                {limit<count &&
+
+                                <button className='btn btn-primary mt-2' onClick={updateLimit}>Xem thêm</button>
+
+                                            }
                             </div>
                             {billdetail && billdetail.length > 0 &&
                                 <div className="col-md">
@@ -245,7 +264,7 @@ function Cart() {
                                             </thead>
                                             <tbody>
                                                 {billdetail.map((item,index)=>
-                                                <tr className="">
+                                                <tr key={index} className="">
                                                 <td scope="row">{++index}</td>
                                                 <td>
                                                     <img style={{'width':'100px'}} src={`https://students.trungthanhweb.com/images/${item.image}`} alt="" />
@@ -255,10 +274,14 @@ function Cart() {
                                                 <td>{Intl.NumberFormat('en-US').format(Number(item.price))}</td>
                                                 <td>{Intl.NumberFormat('en-US').format(Number(item.price)*Number(item.qty))}</td>
 
-                                            </tr>
-
-                                                )}
-                                                
+                                                </tr>
+                                                    
+                                                )
+                                                }
+                                                <tr>
+                                                    <td colSpan={5}>Tổng cộng</td>
+                                                    <td>{Intl.NumberFormat('en-US').format(total)}</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
