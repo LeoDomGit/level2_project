@@ -6,10 +6,8 @@ import { getProducts } from "../redux/productsSlice";
 import Swal from 'sweetalert2'
 function Cart() {
     const dispatch = useDispatch();
-    const { carts, loading } = useSelector((state) => state.carts);
-    const [id, setID] = useState(21);
-    const { products, loadingP } = useSelector((state) => state.products);
-    // const [product,setProduct]= useState({});
+    const  {carts,loading2} = useSelector((state) => state.carts);
+    const [cart,setcart]= useState([]);
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [phoneerr, setPhoneErr] = useState(1);
@@ -23,7 +21,7 @@ function Cart() {
             setPhoneErr(1);
         }
      };
-     console.log(phoneerr);
+
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -52,18 +50,49 @@ function Cart() {
         })
 
     }
-    const submitBill = () => {
+    const submitBill = async () => {
         if (name == '' || address == '' || phone == '') {
-
             Toast.fire({
                 icon: 'error',
                 title: 'Thiếu thông tin nhận hàng'
             })
+        }else{
+            var data = new URLSearchParams();
+            var cart = JSON.parse(localStorage.getItem('cart'));
+            data.append('apitoken',localStorage.getItem('token'));
+            data.append('tenKH',name);
+            data.append('phone',phone);
+            data.append('address',phone);
+            data.append('cart',JSON.stringify(cart));
+            fetch('https://students.trungthanhweb.com/api/createBill', {
+                method:"POST",
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: data
+            }).then((res)=>res.json()).then((res)=>{
+                if(res.check==true){
+                        Toast.fire({
+                    icon: 'success',
+                    title: 'Đặt hàng thành công'
+                }).then(()=>{
+                    localStorage.removeItem('cart')
+                    window.location.replace('/products');
+                })
+                }else{
+                   
+                }
+            })
         }
     }
     useEffect(() => {
-        dispatch(getCart())
-        dispatch(getProducts())
+        if(!localStorage.getItem('cart')||localStorage.getItem('cart')==null){
+            window.location.replace('/products');
+        }else{
+            dispatch(getCart())
+            dispatch(getProducts())
+        }
+
     }, []);
     return (
         <div>
@@ -105,26 +134,30 @@ function Cart() {
                             </div>
                         )}
                     </div>
-
-                    <div className="col-md p-3 border rounded" style={{ 'height': '160px', 'background': '#ebebeb' }}>
-                        <div className="row" >
-                            <div className="col-md">
-                                <label htmlFor="">Tên người nhận</label>
-                                <input type="text" className={`form-control ${name == '' ? 'border border-danger' : ''}`} onChange={(e) => setName(e.target.value)} placeholder='Tên người nhận' />
-                            </div>
-                            <div className="col-md ">
-                                <label htmlFor="">Địa chỉ </label>
-                                <input type="text" className={`form-control ${address == '' ? 'border border-danger' : ''}`} onChange={(e) => setAddress(e.target.value)} placeholder='Địa chỉ' />
-                            </div>
-                            <div className="col-md">
-                                <label htmlFor="">Điện thoại</label>
-                                <input type="text" className={`form-control ${phoneerr ==1 ? 'border border-danger' : ''}`} onKeyUp={(e) => validate(e.target.value)} placeholder='Số điện thoại' />
-                            </div>
-                            <div className="col-md">
-                                <button className={`btn btn-primary mt-4`} onClick={submitBill}>Chốt đơn</button>
-                            </div>
-                        </div>
-                    </div>
+                     {loading2?
+                        ''
+                     :
+                     <div className="col-md p-3 border rounded" style={{ 'height': '160px', 'background': '#ebebeb' }}>
+                                     <div className="row" >
+                                         <div className="col-md">
+                                             <label htmlFor="">Tên người nhận</label>
+                                             <input type="text" className={`form-control ${name == '' ? 'border border-danger' : ''}`} onChange={(e) => setName(e.target.value)} placeholder='Tên người nhận' />
+                                         </div>
+                                         <div className="col-md ">
+                                             <label htmlFor="">Địa chỉ </label>
+                                             <input type="text" className={`form-control ${address == '' ? 'border border-danger' : ''}`} onChange={(e) => setAddress(e.target.value)} placeholder='Địa chỉ' />
+                                         </div>
+                                         <div className="col-md">
+                                             <label htmlFor="">Điện thoại</label>
+                                             <input type="text" className={`form-control ${phoneerr ==1 ? 'border border-danger' : ''}`} onKeyUp={(e) => validate(e.target.value)} placeholder='Số điện thoại' />
+                                         </div>
+                                         <div className="col-md">                     
+                                             <button className={`btn btn-primary mt-4` }   onClick={submitBill}>Chốt đơn</button>
+                                         </div>
+                                     </div>
+                                 </div>
+                     }                           
+    
                 </div>
             </div>
         </div>

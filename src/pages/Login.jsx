@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import "../css/login.css";
 function Login() {
+
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -44,6 +45,15 @@ function Login() {
 
 
       }
+      const checkLogin1 = ()=>{
+        if(localStorage.getItem('token') && localStorage.getItem('token')!=null){
+          localStorage.removeItem('token');
+
+        }
+      }
+      useEffect(()=>{
+        checkLogin1();
+      },[])
     return (
         <div className="wrapper">
           <div className='container1 p-2'>
