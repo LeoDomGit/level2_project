@@ -10,6 +10,7 @@ import ProductRelate from "../components/ProductRelate";
 import Swal from 'sweetalert2'
 import DOMPurify from "dompurify";
 import parse from "html-react-parser";
+import Footer from "../components/Footer";
 import 'swiper/css';
 function Detail() {
     const Toast = Swal.mixin({
@@ -170,8 +171,9 @@ function Detail() {
                     </div>
                 </div>
             </div>
-
+            <Footer/>
         </div>
+        
     )
 }
 

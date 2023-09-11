@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { getCart, deleteItem } from "../redux/cartSlice";
 import { getProducts } from "../redux/productsSlice";
 import "../css/cart.css";
+import Footer from "../components/Footer";
 import Swal from 'sweetalert2'
 function Cart() {
     const dispatch = useDispatch();
@@ -138,7 +139,7 @@ function Cart() {
             <div className="container-fluid px-5">
                 <div className="row w-100 mt-4">
                     <div className="col-md-6">
-                        {carts && carts.length > 0 && (
+                        {localStorage.getItem('cart') && carts.length > 0 && (
 
                             <div className="table-responsive">
                                 <table className="table table-secondary">
@@ -172,7 +173,7 @@ function Cart() {
                             </div>
                         )}
                     </div>
-                    {loading2 || cart.length == 0 ?
+                    {!localStorage.getItem('cart') ||loading2 || cart.length != 0 ?
                         ''
                         :
                         <div className="col-md p-3 border rounded" style={{ 'height': '160px', 'background': '#ebebeb' }}>
@@ -197,9 +198,9 @@ function Cart() {
                     }
 
                 </div>
-                {/* <div className="container">
+                <div className="container">
                     <div className="row">
-                        {carts && carts.length == 0 && (
+                        {localStorage.getItem('cart') && carts.length == 0 && (
 
                             <div className="table-responsive">
                                 <table className="table table-secondary">
@@ -225,13 +226,13 @@ function Cart() {
                             </div>
                         )}
                     </div>
-                </div> */}
-                {bills && bills.length > 0 && cart.length == 0 &&
+                </div>
+                { carts.length == 0 &&
                     <div className="container-fluid px-5 mt-3">
                         <div className="row w-100">
                             <div className="col-md-4">
                                 <ul className="list-group">
-                                    {bills.map((item, index) =>
+                                    {carts.length==0 &&bills.map((item, index) =>
 
                                         <li key={index} onClick={(e) => getDetailBill(item.id)} className={`pointer list-group-item bills ${item.id == idBill   ? 'active' : ''}`}>
                                             <h5>Tên khách hàng : {item.tenKH}</h5>
@@ -293,6 +294,7 @@ function Cart() {
                     </div>
                 }
             </div>
+            <Footer/>
         </div>
     )
 }

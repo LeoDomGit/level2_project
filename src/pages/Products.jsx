@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from "../components/Navbar";
 import Product from '../components/Product';
+import Carousel from '../components/Carousel';
+import Vouchers from '../components/Vouchers';
+import Footer from "../components/Footer";
 import "../css/products.css";
 function Products() {
   const [products, setProducts] = useState([]);
@@ -29,6 +32,8 @@ function Products() {
   return (
     <>
       <Navbar />
+      <Carousel/>
+      <Vouchers/>
       <div className='containerProduct'>
         {products && products.length > 0 &&
           <div className="row mt-4">
@@ -64,6 +69,7 @@ function Products() {
 
           </div>
       </div>
+      <Footer/>
     </>
   )
 }
