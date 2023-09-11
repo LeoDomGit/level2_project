@@ -23,7 +23,6 @@ export const cartSlice = createSlice({
     initialState:{
         carts:[],
         loading2:false,
-        sendBill:false
     },
     reducers:{
         deleteItem : (state,action)=>{
