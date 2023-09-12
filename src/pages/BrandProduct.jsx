@@ -12,7 +12,7 @@ function BrandProduct() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { products, loadingP } = useSelector((state) => state.products);
-  const product = products.filter((item) => item.idCate === id);
+  const product = products.filter((item) => item.idBrand === id);
   const [limit, setLimit] = useState(4);
   const [result,setResult]= useState([]);
   const [search,setSearch]= useState(false);

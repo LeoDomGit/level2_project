@@ -137,7 +137,7 @@ function Cart() {
         <div>
             <Navbar />
             <div className="container-fluid px-5">
-                <div className="row w-100 mt-4">
+                <div style={{'minHeight':'529px'}} className="row w-100 mt-4">
                     <div className="col-md-6">
                         {localStorage.getItem('cart') && carts.length > 0 && (
 

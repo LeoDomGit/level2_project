@@ -41,7 +41,7 @@ function Navbar(props) {
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
             {brands && brands.map((item,index)=>
-            <li key={index}><a className="dropdown-item" href={"#"}>{item.name}</a></li>
+            <li key={index}><a className="dropdown-item" href={`/brandprod/${item.id}`}>{item.name}</a></li>
             
             )}
           </ul>

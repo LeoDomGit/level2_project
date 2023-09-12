@@ -11,7 +11,7 @@ import Logout from "./pages/Logout";
 import Detail from "./pages/Detail";
 import Cart from "./pages/Cart";
 import Cateproduct from "./pages/Cateproduct";
-
+import BrandProduct from './pages/BrandProduct';
 import "./index.css";
 function App() {
 
@@ -23,6 +23,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/products" element={<Products/>}/>
           <Route path="/cateprod/:id" element={<Cateproduct/>}/>
+          <Route path="/brandprod/:id" element={<BrandProduct/>}/>
           <Route path="/todo" element={<Todo/>}/>
           <Route path="/todo1" element={<Todo1/>}/>
           <Route path="/todo2" element={<Todo2/>}/>
