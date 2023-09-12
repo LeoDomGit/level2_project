@@ -46,7 +46,7 @@ function Login() {
 
       }
       const checkLogin1 = ()=>{
-        if(localStorage.getItem('token') && localStorage.getItem('token')!=null){
+        if(localStorage.getItem('token') ||localStorage.getItem('token')==undefined || localStorage.getItem('token')!=null){
           localStorage.removeItem('token');
 
         }
