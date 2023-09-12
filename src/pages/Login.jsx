@@ -39,7 +39,7 @@ function Login() {
             icon: 'success',
             title: 'Đăng nhập thành công'
           }).then(()=>{
-            window.location.replace('/');
+            window.location.replace('/products');
           })
         }
 
