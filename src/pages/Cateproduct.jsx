@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 import Carousel from '../components/Carousel';
 import Product from '../components/Product';
 
-import { getProducts, cateProducts } from "../redux/productsSlice";
+import { getProducts } from "../redux/productsSlice";
 function Cateproduct() {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -43,7 +43,7 @@ function Cateproduct() {
     
   }
   useEffect(() => {
-    dispatch(cateProducts(id));
+    dispatch(getProducts());
 
     console.log(products);
   }, [])
