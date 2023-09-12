@@ -9,6 +9,15 @@ export const productsSlice = createSlice({
         products:[],
         loadingP:false
     },
+    reducers:{
+        cateProducts:(state,action)=>{
+            state.products= state.products.filter((ỉtem)=>ỉtem.idCate === action.payload);
+        },
+        brandProducts:(state,action)=>{
+            state.products= state.products.filter((ỉtem)=>ỉtem.idBrand === action.payload);
+            
+        }
+    },
     extraReducers:{
        [getProducts.pending]:(state,action)=>{
         state.loadingP=true;
@@ -22,4 +31,5 @@ export const productsSlice = createSlice({
     }
     }
 })
+export const {cateProducts,brandProducts} = productsSlice.actions;
 export default productsSlice.reducer
