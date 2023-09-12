@@ -24,7 +24,6 @@ function Products() {
   }
   const loadMore= ()=>{
     setLimit(limit+4);
-    getValue();
   }
   useEffect(() => {
     getValue();
@@ -37,7 +36,7 @@ function Products() {
       <div className='containerProduct'>
         {products && products.length > 0 &&
           <div className="row mt-4">
-            {products.map((item,index) =>
+            {products.slice(0,limit).map((item,index) =>
               <div className="col-md-3 mb-3" key={index}>
                 <Product image={image + item.images} id={item.id} name={item.name} price={item.price} />
               </div>
