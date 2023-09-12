@@ -26,10 +26,12 @@ export const cartSlice = createSlice({
     reducers:{
         deleteItem : (state,action)=>{
             state.carts= state.carts.filter((item)=>item[0] !== action.payload);
-            if(state.carts.length>0){
-                localStorage.setItem('cart',JSON.stringify(state.carts));
+            var cart = JSON.parse(localStorage.getItem('cart'));
+            if(cart.length>0){
+                cart = cart.filter((item)=>item[0] != action.payload);
+                localStorage.setItem('cart',JSON.stringify(cart));
             }else{
-            localStorage.removeItem('cart');
+                localStorage.removeItem('cart');
 
             }
         },

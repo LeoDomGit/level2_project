@@ -11,7 +11,12 @@ export const productsSlice = createSlice({
     },
     reducers:{
         cateProducts:(state,action)=>{
-            state.products= state.products.filter((ỉtem)=>ỉtem.idCate === action.payload);
+        //    console.log(state.products);
+            console.log(state.products);
+        // var result = state.products.filter((ỉtem)=>ỉtem.idCate === action.payload);
+            // console.log(state.products);
+            // state.products=
+            // console.log(state.products);
         },
         brandProducts:(state,action)=>{
             state.products= state.products.filter((ỉtem)=>ỉtem.idBrand === action.payload);

@@ -12,11 +12,14 @@ function Cateproduct() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { products, loadingP } = useSelector((state) => state.products);
+  console.log(products);
+  // const [products,setProducts]= useState([]);
   const product = products.filter((item) => item.idCate === id);
   const [limit, setLimit] = useState(4);
   const [result,setResult]= useState([]);
   const [search,setSearch]= useState(false);
   const image=`https://students.trungthanhweb.com/images/`;
+
   const searchPrice = (e)=>{
     if(e!=''){
       var result = product.filter(product=>product.price <Number(e));
@@ -40,7 +43,9 @@ function Cateproduct() {
     
   }
   useEffect(() => {
-    dispatch(getProducts())
+    dispatch(cateProducts(id));
+
+    console.log(products);
   }, [])
   return (
     <>
