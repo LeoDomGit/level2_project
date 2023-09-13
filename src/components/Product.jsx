@@ -11,7 +11,7 @@ function Product(props) {
   const selectProduct= (e)=>{
     setID(e);
     const result = dispatch(getSingle(e));
-    console.log(singleProduct);
+    console.log(result);
   }
   const Toast = Swal.mixin({
     toast: true,
@@ -25,10 +25,10 @@ function Product(props) {
     }
   })
   const addToCart = (id) => {
+    var arr = [];
+
     if (localStorage.getItem('cart') && localStorage.getItem('cart') != null) {
-      var arr = JSON.parse(localStorage.getItem('cart'));
-    } else {
-      var arr = [];
+      arr = JSON.parse(localStorage.getItem('cart'));
     }
     var check = false;
     arr.forEach(el => {
