@@ -39,7 +39,7 @@ function Products() {
           <div className="row mt-4">
             {products.map((item,index) =>
               <div className="col-md-3 mb-3" key={index}>
-                <Product image={image + item.images} id={item.id} name={item.name} price={item.price} />
+                <Product image={image + item.images} id={item.id} name={item.name} brandname={item.brandname} catename={item.catename} price={item.price} />
               </div>
             )}
 

@@ -59,12 +59,12 @@ function BrandProduct() {
             <div className="row" style={{'width':"100%"}}>
               {!search && products && product.length > 0 && product.slice(0,limit).map((item,index) =>
                 <div key={index} className="col-md-3 mb-2">
-                  <Product image={image + item.images} id={item.id} name={item.name} price={item.price} />
+                  <Product image={image + item.images} brandname={item.brandname} catename={item.catename} id={item.id} name={item.name} price={item.price} />
                 </div>
               )}
               {search && result && result.length > 0 && result.slice(0,limit).map((item,index) =>
                 <div key={index} className="col-md-3 mb-2">
-                  <Product image={image + item.images} id={item.id} name={item.name} price={item.price} />
+                  <Product image={image + item.images} brandname={item.brandname} catename={item.catename} id={item.id} name={item.name} price={item.price} />
                 </div>
               )}
             </div>
