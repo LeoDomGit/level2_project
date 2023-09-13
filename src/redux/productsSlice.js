@@ -7,7 +7,18 @@ export const productsSlice = createSlice({
     name:'products',
     initialState:{
         products:[],
-        loadingP:false
+        loadingP:false,
+        singleProduct:[]
+    },
+    reducers:{
+        getSingle:(state,action)=>{
+          state.products.forEach(el => {
+            if(el.id===action.payload){
+                state.singleProduct=el;
+            }
+          });
+            
+        }
     },
     extraReducers:{
        [getProducts.pending]:(state,action)=>{
@@ -22,4 +33,5 @@ export const productsSlice = createSlice({
     }
     }
 })
+export const {getSingle} = productsSlice.actions;
 export default productsSlice.reducer

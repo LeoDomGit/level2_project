@@ -1,6 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts,getSingle } from "../redux/productsSlice";
+
 function Product(props) {
+  const dispatch = useDispatch();
+  const [id,setID]= useState(0);
+  const { products, loadingP,singleProduct } = useSelector((state) => state.products);
+
+  const selectProduct= (e)=>{
+    setID(e);
+    const result = dispatch(getSingle(e));
+    console.log(singleProduct);
+  }
   const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -34,6 +46,9 @@ function Product(props) {
       title: 'Đã thêm thành công'
     })
   }
+  useEffect(()=>{
+    dispatch(getProducts())
+  },[])
   return (
     <div>
       <div className="row" >
@@ -41,15 +56,15 @@ function Product(props) {
         <div className="container mt-4">
               <div className="row">
                 <div className="col-md-3">
-                <span class="badge bg-danger">{props.catename}</span>
+                <span className="badge bg-danger">{props.catename}</span>
                 </div>
                 <div className="col-md-3">
-                <span class="badge bg-warning">{props.brandname}</span>
+                <span className="badge bg-warning">{props.brandname}</span>
 
                 </div>
               </div>
             </div>
-          <img src={props.image} style={{ 'width': '60%', 'height': 'auto', 'margin': '0px auto' }} className="card-img-top pt-3" alt="..." />
+          <img onClick={(e)=>selectProduct(props.id)} src={props.image} style={{ 'width': '60%', 'height': 'auto', 'margin': '0px auto' }} className="card-img-top pt-3" alt="..." />
           <div className="card-body">
             <h5 className="card-title text-center">{props.name}</h5>
             <p className="card-text text-center">
