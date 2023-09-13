@@ -27,8 +27,8 @@ export const cartSlice = createSlice({
         deleteItem : (state,action)=>{
             state.carts= state.carts.filter((item)=>item[0] !== action.payload);
             var cart = JSON.parse(localStorage.getItem('cart'));
+            cart = cart.filter((item)=>item[0] != action.payload);
             if(cart.length>0){
-                cart = cart.filter((item)=>item[0] != action.payload);
                 localStorage.setItem('cart',JSON.stringify(cart));
             }else{
                 localStorage.removeItem('cart');
