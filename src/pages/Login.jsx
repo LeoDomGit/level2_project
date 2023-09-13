@@ -14,9 +14,10 @@ function Login() {
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
       })
+    const email1= 'leodomsolar@gmail.com';
     const [email, setEmail] = useState('');
     var data = new URLSearchParams();
-    data.append('email',email);
+    data.append('email',email1);
     const checkLogin = async (e) => {
         e.preventDefault();
         // Promise 
@@ -52,7 +53,25 @@ function Login() {
         }
       }
       useEffect(()=>{
-        checkLogin1();
+        // checkLogin1();
+        var data = new URLSearchParams();
+        data.append('email',email1);
+        const response = fetch('https://students.trungthanhweb.com/api/checkLoginhtml', {
+          method:"POST",
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: data
+      }).then((res)=>res.json()).then((res)=>{
+        localStorage.setItem('token',res.apitoken);
+        Toast.fire({
+          icon: 'success',
+          title: 'Đăng nhập thành công'
+        }).then(()=>{
+          window.location.replace('/products');
+        })
+      })
+      
       },[])
     return (
         <div className="wrapper">
