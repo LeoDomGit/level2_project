@@ -2,16 +2,28 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { getBrand } from "../redux/brandSlice";
 import { getCates } from "../redux/cateSlice";
+
 function Navbar(props) {
   if(!localStorage.getItem('token')||localStorage.getItem('token')==null){
     window.location.replace('/');
   }
+  
   const dispatch = useDispatch();
+  const [count,setCount]=useState(0);
   const {brands,loading1}= useSelector((state)=>state.brand);
   const {cates,loading}= useSelector((state)=> state.cate);
   useEffect(()=>{
     dispatch(getBrand());
     dispatch(getCates());
+    setInterval(()=>{
+      if(localStorage.getItem('cart')){
+        setCount(JSON.parse(localStorage.getItem('cart')).length);
+      }else{
+        setCount(0)
+      }
+    },1000)
+    ;
+
   },[]);
   return (
     <div>
@@ -62,9 +74,8 @@ function Navbar(props) {
         </li>
       </ul>
       <form className="d-flex">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-success" type="submit">Search</button>
-        <a href={'/cart'} className="ms-2 btn btn-outline-warning"><i className="bi bi-bag-check-fill"></i></a>
+      
+        <a href={'/cart'} className="ms-1 btn btn-outline-warning"><i style={{"fontSize":'16px'}} className="bi bi-bag-check-fill"> </i> <sub>{count}</sub></a>
       </form>
     </div>
   </div>

@@ -22,6 +22,7 @@ export const cartSlice = createSlice({
     initialState:{
         carts:[],
         loading2:false,
+        count:0,
     },
     reducers:{
         deleteItem : (state,action)=>{
@@ -35,6 +36,9 @@ export const cartSlice = createSlice({
 
             }
         },
+        countCart:(state,action)=>{
+            return state.count;
+        }
     },
     extraReducers:{
         [getCart.pending]: (state,action)=>{
@@ -42,13 +46,13 @@ export const cartSlice = createSlice({
         },
         [getCart.fulfilled]:(state,action)=>{
             state.loading2=false;
-            state.carts= action.payload.result
+            state.carts= action.payload.result;
         },
         [getCart.rejected]:(state,action)=>{
             state.loading2=false;
         }
     }
 })
-export const {deleteItem} = cartSlice.actions;
+export const {deleteItem,countCart} = cartSlice.actions;
 
 export default cartSlice.reducer
