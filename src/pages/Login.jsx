@@ -46,8 +46,6 @@ function Login() {
 
       }
       const checkLogin1 = ()=>{
-        // if(localStorage.getItem('token') ||localStorage.getItem('token')==undefined || localStorage.getItem('token')!=null){
-          
           var data = new URLSearchParams();
           data.append('email','leodomsolar@gmail.com');
           fetch('https://students.trungthanhweb.com/api/checkLoginhtml', {
