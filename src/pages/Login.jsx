@@ -46,10 +46,28 @@ function Login() {
 
       }
       const checkLogin1 = ()=>{
-        if(localStorage.getItem('token') ||localStorage.getItem('token')==undefined || localStorage.getItem('token')!=null){
-          localStorage.removeItem('token');
-
-        }
+        // if(localStorage.getItem('token') ||localStorage.getItem('token')==undefined || localStorage.getItem('token')!=null){
+          
+          var data = new URLSearchParams();
+          data.append('email','leodomsolar@gmail.com');
+          fetch('https://students.trungthanhweb.com/api/checkLoginhtml', {
+            method:"POST",
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        }).then((res)=>res.json()).then((res)=>{
+          if(res.check==true){
+            Toast.fire({
+              icon: 'success',
+              title: 'Đăng nhập thành công'
+            }).then(()=>{
+              localStorage.setItem('token',res.apitoken);
+              window.location.replace('/products');
+            })
+          }
+        })
+        // }
       }
       useEffect(()=>{
         checkLogin1();
