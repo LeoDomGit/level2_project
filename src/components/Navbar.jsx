@@ -69,9 +69,6 @@ function Navbar(props) {
             )}
           </ul>
         </li>
-        <li className="nav-item">
-          <a className="nav-link" href={'/logout'}>Logout</a>
-        </li>
       </ul>
       <form className="d-flex">
       
