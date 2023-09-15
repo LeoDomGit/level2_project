@@ -54,14 +54,14 @@ function Cateproduct() {
       <div className="container-fluid mb-5">
         <div className="row w-100">
           <div className="col-md-3 border-end">
-            <div className="container">
+            <div className="container text-center mb-3">
               <input type="text" className='form-control' onChange={(e)=>searchName(e.target.value)}  placeholder='Tên sản phẩm' />
               <hr />
               <input type="number" placeholder='Số tiền' onChange={(e)=>searchPrice(e.target.value)} className="form-control" />
             </div>
           </div>
-          <div className="col-md">
-            <div className="row" style={{'width':"100%"}}>
+          <div className="col-md w-100">
+            <div className="row w-100 ms-3" >
               {!search && products && product.length > 0 && product.slice(0,limit).map((item,index) =>
                 <div key={index} className="col-md-3 mb-2">
                   <Product image={image + item.images} id={item.id} name={item.name} brandname={item.brandname} catename={item.catename} price={item.price} />
@@ -75,7 +75,7 @@ function Cateproduct() {
             </div>
             {!search && limit<product.length &&
             <div className="row w-100 mt-3">
-                <div className="col-md-2">
+                <div className="ps-5 col-md-2">
                   <button className='btn btn-primary' onClick={()=>setLimit(limit+4)}>Xem thêm</button>
 
                 </div>
@@ -83,7 +83,7 @@ function Cateproduct() {
             }
             {search && limit<result.length &&
             <div className="row w-100 mt-3">
-                <div className="col-md-2">
+                <div className="ps-5 col-md-2">
                   <button className='btn btn-primary' onClick={()=>setLimit(limit+4)}>Xem thêm</button>
 
                 </div>

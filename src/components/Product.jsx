@@ -51,8 +51,8 @@ function Product(props) {
   },[])
   return (
     <div>
-      <div className="row" >
-        <div className="card" style={{ "width": "97%", "background": "white", "fontFamily": "Times New Roman", "boxShadow": "1px 1px 1px 2px grey" }}>
+      <div className="row w-100" style={{'margin':'0px auto'}} >
+        <div className="card" style={{ "width": "97%", "background": "white", "fontFamily": "Times New Roman", "boxShadow": "1px 1px 1px 2px grey",'margin':'0px auto' }}>
         <div className="container mt-4">
               <div className="row">
                 <div className="col-md-3">

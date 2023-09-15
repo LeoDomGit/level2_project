@@ -15,5 +15,5 @@ export const store = configureStore({
         carts:cartSlice,
         products:productsSlice,
         bills:billSlice,
-    }
+    },
 })
