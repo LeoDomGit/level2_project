@@ -67,6 +67,10 @@ function Navbar(props) {
             <li key={index}><a className="dropdown-item" href={`/cateprod/${item.id}`}>{item.name}</a></li>
             
             )}
+            {!cates || cates.length==0 &&
+            <li ><a className="dropdown-item" href={`#`}>Chưa có gì cả</a></li>
+            
+            }
           </ul>
         </li>
       </ul>
