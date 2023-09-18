@@ -38,6 +38,16 @@ export const cartSlice = createSlice({
         },
         countCart:(state,action)=>{
             return state.count;
+        },
+        updateQuantity: (state,action)=>{
+            var cart = JSON.parse(localStorage.getItem('cart'));
+            
+            cart.forEach(el => {
+                if(el[0]==action.payload.id){
+                    el[1]=action.payload.qty;
+                }
+            });
+            localStorage.setItem('cart',JSON.stringify(cart));
         }
     },
     extraReducers:{
@@ -53,6 +63,6 @@ export const cartSlice = createSlice({
         }
     }
 })
-export const {deleteItem,countCart} = cartSlice.actions;
+export const {deleteItem,countCart,updateQuantity} = cartSlice.actions;
 
 export default cartSlice.reducer
