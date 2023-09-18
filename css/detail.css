@@ -1,0 +1,13 @@
+.mainProduct{
+    width: 100%;
+}
+.carousel .slide img {
+    width:60% !important;
+}
+.footer{
+    width: 100%;
+}
+.footer a{
+    color: white;
+    text-decoration: none;
+}

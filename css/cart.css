@@ -1,0 +1,13 @@
+input:focus{
+    border: none;
+}
+.pointer{
+    cursor: pointer;
+}
+.footer{
+    width: 100.5%;
+}
+.footer a{
+    color: white;
+    text-decoration: none;
+}
