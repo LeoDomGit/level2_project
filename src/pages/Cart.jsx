@@ -123,7 +123,6 @@ function Cart() {
             qty:qty,
             }
         ))
-        dispatch(getCart())
         window.location.reload();
     }
     const updateLimit = () => {
