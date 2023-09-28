@@ -56,13 +56,8 @@ function Login() {
             body: data
         }).then((res)=>res.json()).then((res)=>{
           if(res.check==true){
-            Toast.fire({
-              icon: 'success',
-              title: 'Đăng nhập thành công'
-            }).then(()=>{
               localStorage.setItem('token',res.apitoken);
               window.location.replace('/products');
-            })
           }
         })
         // }
