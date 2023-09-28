@@ -7,8 +7,8 @@
 .wrapper{
     width: 100%;
     background-color: rgb(69, 160, 224);
-    min-height: 1000px;
-        padding-top: 10%;
+    min-height: 969px;
+    padding-top: 10%;
 }
 .container1 {
     width:60%;
@@ -22,4 +22,12 @@
 }
 .col2{
     padding-top: 20%;
+}
+@media screen and (max-width:1000px) {
+    .wrapper{
+        width: 100%;
+        background-color: rgb(69, 160, 224);
+        min-height: 872px;
+        padding-top: 10%;
+    }
 }

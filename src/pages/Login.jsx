@@ -39,7 +39,7 @@ function Login() {
             icon: 'success',
             title: 'Đăng nhập thành công'
           }).then(()=>{
-            window.location.replace('/products');
+            // window.location.replace('/products');
           })
         }
 
@@ -72,7 +72,7 @@ function Login() {
       },[])
     return (
         <div className="wrapper">
-          <div className='container1 p-2'>
+          {/* <div className='container1 p-2'>
               <div className="row maincontainer">
                   <div className="col-md-3">
                       <img className='w-100' src="https://i.pinimg.com/1200x/0b/72/66/0b7266f3138683332e26264e04bd0063.jpg" alt="" />
@@ -84,7 +84,7 @@ function Login() {
                       </div>
                   </div>
               </div>
-          </div>
+          </div> */}
         </div>
         
     )
