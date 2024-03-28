@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
-import { getCart, deleteItem,updateQuantity } from "../redux/cartSlice";
+import { getCart, deleteItem, updateQuantity } from "../redux/cartSlice";
 import { getProducts } from "../redux/productsSlice";
 import "../css/cart.css";
 import Footer from "../components/Footer";
@@ -117,10 +117,11 @@ function Cart() {
                 })
         }
     }
-    const updateQuantityF = async (id,qty)=>{
+    const updateQuantityF = async (id, qty) => {
         dispatch(updateQuantity(
-            {id:id,
-            qty:qty,
+            {
+                id: id,
+                qty: qty,
             }
         ))
         window.location.reload();
@@ -170,8 +171,8 @@ function Cart() {
                                                     <td><a href={`/chitiet/${item[0]}`}><img style={{ 'width': '100px' }} src={item[3]} alt="" /></a></td>
                                                     <td className='text-left align-middle'><a style={{ "textDecoration": "none" }} href={`/chitiet/${item[0]}`}>{item[1]}</a></td>
                                                     <td className='text-left align-middle'>{Intl.NumberFormat('en-US').format(item[5])}</td>
-                                                    <td className='text-left align-middle' style={{'width':'20%'}}>
-                                                    <input type="number" className="form-control" onChange={(e)=> updateQuantityF(item[0],Number(e.target.value))} placeholder="" value={item[4]}/>
+                                                    <td className='text-left align-middle' style={{ 'width': '20%' }}>
+                                                        <input type="number" className="form-control" onChange={(e) => updateQuantityF(item[0], Number(e.target.value))} placeholder="" value={item[4]} />
 
                                                     </td>
                                                     <td className='text-left align-middle'>{Intl.NumberFormat('en-US').format(item[6])}</td>
@@ -214,9 +215,9 @@ function Cart() {
                 <div className="container">
 
                 </div>
-                {carts.length == 0 &&
+                {carts.length == 0 && bills.length > 0 &&
                     <div className="container-fluid px-5 mt-3">
-                        <div className="row w-100">
+                        <div style={{ minHeight: '525px' }} className="row w-100">
                             <div className="col-md-4">
                                 <ul className="list-group">
                                     {carts.length == 0 && bills.slice(0, limit).map((item, index) =>
@@ -238,7 +239,7 @@ function Cart() {
                             </div>
                             {billdetail && billdetail.length > 0 &&
                                 <div className="col-md">
-                                    <div className="table-responsive">
+                                    <div className="table-responsive cardTable">
                                         <table className="table table-light border">
                                             <thead>
                                                 <tr>
@@ -273,7 +274,23 @@ function Cart() {
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div className="card cardMobile">
+                                        <div className="card-header">
+                                            Hoá đơn
+                                        </div>
+                                        <div className="card-body">
+                                            {billdetail.map((item, index) =>
+                                                <div key={index}>
+                                                    <h5 className="card-title">Tên sản phẩm : {item.productname}</h5>
+                                                    <h5 className="card-title">Giá : {Intl.NumberFormat('en-US').format(Number(item.price))}</h5>
+                                                    <h5 className="card-title">Số lượng : {item.qty}</h5>
+                                                    <h5 className="card-title">Thành tiền : {Intl.NumberFormat('en-US').format(Number(item.price) * Number(item.qty))}</h5>
 
+                                                </div>
+                                            )
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
                             }
 
@@ -282,7 +299,7 @@ function Cart() {
                 }
             </div>
             <Footer />
-        </div>
+        </div >
     )
 }
 

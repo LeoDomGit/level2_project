@@ -1,13 +1,32 @@
-input:focus{
-    border: none;
+input:focus {
+  border: none;
 }
-.pointer{
-    cursor: pointer;
+.pointer {
+  cursor: pointer;
 }
-.footer{
-    width: 100.5%;
+.footer {
+  width: 100.5%;
 }
-.footer a{
-    color: white;
-    text-decoration: none;
+.footer a {
+  color: white;
+  text-decoration: none;
+}
+@media screen and (max-width: 1500px) {
+  .cardTable {
+    display: none;
+  }
+  .cardMobile {
+    display: block;
+  }
+  .container-fluid {
+    width: 100% Im !important;
+  }
+}
+@media screen and (min-width: 1501px) {
+  .cardMobile {
+    display: block;
+  }
+  .cardTable {
+    display: block;
+  }
 }
