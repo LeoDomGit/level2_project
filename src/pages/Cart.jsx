@@ -239,58 +239,66 @@ function Cart() {
                             </div>
                             {billdetail && billdetail.length > 0 &&
                                 <div className="col-md">
-                                    <div className="table-responsive cardTable">
-                                        <table className="table table-light border">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col border">#</th>
-                                                    <th scope="col border">Hình ảnh</th>
-                                                    <th scope="col border">Tên sản phẩm</th>
-                                                    <th scope="col border">Số lượng</th>
-                                                    <th scope="col border">Đơn giá</th>
-                                                    <th scope="col border">Thành tiền</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {billdetail.map((item, index) =>
-                                                    <tr key={index} className="">
-                                                        <td scope="row">{++index}</td>
-                                                        <td>
-                                                            <img style={{ 'width': '100px' }} src={`https://students.trungthanhweb.com/images/${item.image}`} alt="" />
-                                                        </td>
-                                                        <td>{item.productname}</td>
-                                                        <td>{item.qty}</td>
-                                                        <td>{Intl.NumberFormat('en-US').format(Number(item.price))}</td>
-                                                        <td>{Intl.NumberFormat('en-US').format(Number(item.price) * Number(item.qty))}</td>
-
+                                    {window.innerWidth > 768 && (
+                                        <div className="table-responsive cardTable">
+                                            <table className="table table-light border">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col border">#</th>
+                                                        <th scope="col border">Hình ảnh</th>
+                                                        <th scope="col border">Tên sản phẩm</th>
+                                                        <th scope="col border">Số lượng</th>
+                                                        <th scope="col border">Đơn giá</th>
+                                                        <th scope="col border">Thành tiền</th>
                                                     </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {billdetail.map((item, index) =>
+                                                        <tr key={index} className="">
+                                                            <td scope="row">{++index}</td>
+                                                            <td>
+                                                                <img style={{ 'width': '100px' }} src={`https://students.trungthanhweb.com/images/${item.image}`} alt="" />
+                                                            </td>
+                                                            <td>{item.productname}</td>
+                                                            <td>{item.qty}</td>
+                                                            <td>{Intl.NumberFormat('en-US').format(Number(item.price))}</td>
+                                                            <td>{Intl.NumberFormat('en-US').format(Number(item.price) * Number(item.qty))}</td>
+
+                                                        </tr>
+
+                                                    )
+                                                    }
+                                                    <tr>
+                                                        <td colSpan={5}>Tổng cộng</td>
+                                                        <td>{Intl.NumberFormat('en-US').format(total)}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    )}
+
+                                    {window.innerWidth <= 768 && (
+                                        <div className="card rowCard">
+                                            <div className="card-header">
+                                                Hoá đơn
+                                            </div>
+                                            <div className="card-body">
+                                                {billdetail.map((item, index) =>
+                                                    <div key={index}>
+                                                        <h5 className="card-title">Tên sản phẩm : {item.productname}</h5>
+                                                        <h5 className="card-title">Giá : {Intl.NumberFormat('en-US').format(Number(item.price))}</h5>
+                                                        <h5 className="card-title">Số lượng : {item.qty}</h5>
+                                                        <h5 className="card-title">Thành tiền : {Intl.NumberFormat('en-US').format(Number(item.price) * Number(item.qty))}</h5>
+                                                        <hr />
+                                                    </div>
 
                                                 )
                                                 }
-                                                <tr>
-                                                    <td colSpan={5}>Tổng cộng</td>
-                                                    <td>{Intl.NumberFormat('en-US').format(total)}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div className="card cardMobile">
-                                        <div className="card-header">
-                                            Hoá đơn
+                                                <h5 className="card-title">Tổng tiền : {Intl.NumberFormat('en-US').format(total)}</h5>
+                                            </div>
                                         </div>
-                                        <div className="card-body">
-                                            {billdetail.map((item, index) =>
-                                                <div key={index}>
-                                                    <h5 className="card-title">Tên sản phẩm : {item.productname}</h5>
-                                                    <h5 className="card-title">Giá : {Intl.NumberFormat('en-US').format(Number(item.price))}</h5>
-                                                    <h5 className="card-title">Số lượng : {item.qty}</h5>
-                                                    <h5 className="card-title">Thành tiền : {Intl.NumberFormat('en-US').format(Number(item.price) * Number(item.qty))}</h5>
+                                    )}
 
-                                                </div>
-                                            )
-                                            }
-                                        </div>
-                                    </div>
                                 </div>
                             }
 

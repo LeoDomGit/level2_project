@@ -19,14 +19,17 @@ input:focus {
     display: block;
   }
   .container-fluid {
-    width: 100% Im !important;
+    width: 100% !important;
   }
 }
 @media screen and (min-width: 1501px) {
-  .cardMobile {
-    display: block;
+  .cardMobile .card {
+    display: none;
   }
   .cardTable {
     display: block;
+  }
+  .rowCard {
+    display: none;
   }
 }
