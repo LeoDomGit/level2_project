@@ -1,13 +1,18 @@
-.mainProduct{
-    width: 100%;
+.mainProduct {
+  width: 100%;
 }
 .carousel .slide img {
-    width:60% !important;
+  width: 60% !important;
 }
-.footer{
-    width: 100%;
+.footer {
+  width: 100%;
 }
-.footer a{
-    color: white;
-    text-decoration: none;
+.footer a {
+  color: white;
+  text-decoration: none;
+}
+th,
+td {
+  border: 1px solid black !important;
+  padding-left: 10px;
 }

@@ -20,31 +20,31 @@ function Detail() {
         timer: 1700,
         timerProgressBar: true,
         didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
-      })
-      const { id } = useParams();
-      const addTocart = ()=>{
-        if(localStorage.getItem('cart') && localStorage.getItem('cart')!=null){
-          var arr=JSON.parse(localStorage.getItem('cart'));
-        }else{
-          var arr=[];
+    })
+    const { id } = useParams();
+    const addTocart = () => {
+        if (localStorage.getItem('cart') && localStorage.getItem('cart') != null) {
+            var arr = JSON.parse(localStorage.getItem('cart'));
+        } else {
+            var arr = [];
         }
-        var check=false;
+        var check = false;
         arr.forEach(el => {
-          if(el[0]==id){
-            el[1]++;
-            check=true;
-          }
+            if (el[0] == id) {
+                el[1]++;
+                check = true;
+            }
         });
-        if(check==false){
-          arr.push([Number(id),1]);
+        if (check == false) {
+            arr.push([Number(id), 1]);
         }
-        localStorage.setItem('cart',JSON.stringify(arr));
+        localStorage.setItem('cart', JSON.stringify(arr));
         Toast.fire({
-          icon: 'success',
-          title: 'Đã thêm thành công'
+            icon: 'success',
+            title: 'Đã thêm thành công'
         })
     }
 
@@ -66,11 +66,10 @@ function Detail() {
             }
         });
     }
-    const detail =product.content;
+    const detail = product.content;
     const detailclean = DOMPurify.sanitize(detail, {
         USE_PROFILES: { html: true },
-      });
-      console.log(detailclean);
+    });
     useEffect(() => {
         getData();
     }, [])
@@ -84,43 +83,46 @@ function Detail() {
                         <Carousel showStatus={false} showArrows={true}>
                             {gallery && gallery.map((item) =>
                                 <div key={item.id}>
-                                    <img  src={item} />
+                                    <img src={item} />
                                 </div>
                             )}
                         </Carousel>
                     </div>
-                    <div className="col-md-8 pt-5">
-                        <div className="row w-50">
-                            <div className="table-responsive">
-                                <table className="table table-primary">
-                                    <tbody>
-                                        <tr className="">
-                                            <td scope="row">Tên sản phẩm </td>
-                                            <td>{product.name}</td>
-                                        </tr>
-                                        <tr className="">
-                                            <td scope="row">Giá</td>
-                                            <td>{Intl.NumberFormat('en-US').format(Number(product.price))}</td>
-                                        </tr>
-                                        <tr className="">
-                                            <td scope="row">Giảm giá</td>
-                                            <td><b>{product.discount}%</b></td>
-                                        </tr>
-                                        <tr className="">
-                                            <td scope="row">Thương hiệu</td>
-                                            <td><b>{product.brandname}</b></td>
-                                        </tr>
-                                        <tr className="">
-                                            <td scope="row">Loại sản phẩm</td>
-                                            <td><b>{product.catename}</b></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                    <div className={window.innerWidth > 768 ? "col-md-8 pt-5" : 'col-md pt-5'}>
+                        <div className={window.innerWidth > 768 ? "row w-50" :
+                            'row w-100'}>
+                            <div className='col-md'>
+                                <div className="table-responsive">
+                                    <table className="table table-primary">
+                                        <tbody>
+                                            <tr className="">
+                                                <td scope="row">Tên sản phẩm </td>
+                                                <td>{product.name}</td>
+                                            </tr>
+                                            <tr className="">
+                                                <td scope="row">Giá</td>
+                                                <td>{Intl.NumberFormat('en-US').format(Number(product.price))}</td>
+                                            </tr>
+                                            <tr className="">
+                                                <td scope="row">Giảm giá</td>
+                                                <td><b>{product.discount}%</b></td>
+                                            </tr>
+                                            <tr className="">
+                                                <td scope="row">Thương hiệu</td>
+                                                <td><b>{product.brandname}</b></td>
+                                            </tr>
+                                            <tr className="">
+                                                <td scope="row">Loại sản phẩm</td>
+                                                <td><b>{product.catename}</b></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <br />
                             <div className="row ms-0 mb-5">
                                 <div className="col-md">
-                                    <button className='btn btn-success w-100' onClick={()=>addTocart()}>Thêm vào giỏ hàng</button>
+                                    <button className='btn btn-success w-100' onClick={() => addTocart()}>Thêm vào giỏ hàng</button>
                                 </div>
                                 <div className="col-md">
                                     <button className='btn btn-warning  w-100 '>Trả góp</button>
@@ -128,52 +130,69 @@ function Detail() {
                             </div>
                         </div>
                         <div className="row">
-                            {brandProducts && brandProducts.length>0 &&
-                            <div className="col-md-6">
-                                <h4>Sản phẩm cùng thương hiệu</h4>
-                            <Swiper
-                                spaceBetween={30}
-                                slidesPerView={3}
-                                onSlideChange={() => console.log('slide change')}
-                            >
-                                { brandProducts.map((item)=>
-                                    <SwiperSlide>
-                                        <ProductRelate key={item.id} name={item.name} image={image+item.image} id={item.id} price={item.price}/>
-                                    </SwiperSlide>
-                                )}
-                                
-                            
-                            </Swiper>
-                            </div>
+                            {brandProducts && brandProducts.length > 0 &&
+                                <div className="col-md-6">
+                                    <h4>Sản phẩm cùng thương hiệu</h4>
+                                    {
+                                        window.innerWidth > 768 ?
+                                            <Swiper
+                                                spaceBetween={30}
+                                                slidesPerView={3}
+                                                onSlideChange={() => console.log('slide change')}
+                                            >
+                                                {brandProducts.map((item) =>
+                                                    <SwiperSlide>
+                                                        <ProductRelate key={item.id} name={item.name} image={image + item.image} id={item.id} price={item.price} />
+                                                    </SwiperSlide>
+                                                )}
+
+
+                                            </Swiper>
+                                            :
+                                            <Swiper
+                                                spaceBetween={30}
+                                                slidesPerView={1}
+                                                onSlideChange={() => console.log('slide change')}
+                                            >
+                                                {brandProducts.map((item) =>
+                                                    <SwiperSlide>
+                                                        <ProductRelate key={item.id} name={item.name} image={image + item.image} id={item.id} price={item.price} />
+                                                    </SwiperSlide>
+                                                )}
+
+
+                                            </Swiper>
+                                    }
+                                </div>
                             }
-                            {cateProducts && cateProducts.length>0 && 
-                            <div className="col-md-6">
-                                <h4>Sản phẩm cùng loại</h4>
-                            <Swiper
-                                spaceBetween={30}
-                                slidesPerView={3}
-                                onSlideChange={() => console.log('slide change')}
-                            >
-                                { cateProducts.map((item)=>
-                                    <SwiperSlide>
-                                        <ProductRelate key={item.id} name={item.name} image={image+item.image} id={item.id} price={item.price}/>
-                                    </SwiperSlide>
-                                )}
-                                
-                            
-                            </Swiper>
-                            </div>      
+                            {cateProducts && cateProducts.length > 0 &&
+                                <div className="col-md-6">
+                                    <h4>Sản phẩm cùng loại</h4>
+                                    <Swiper
+                                        spaceBetween={30}
+                                        slidesPerView={3}
+                                        onSlideChange={() => console.log('slide change')}
+                                    >
+                                        {cateProducts.map((item) =>
+                                            <SwiperSlide>
+                                                <ProductRelate key={item.id} name={item.name} image={image + item.image} id={item.id} price={item.price} />
+                                            </SwiperSlide>
+                                        )}
+
+
+                                    </Swiper>
+                                </div>
                             }
                         </div>
-                        <div className="row mt-2 w-100">
-                                {parse(detailclean)}
+                        <div className="row mt-2 detail" style={{ width: window.innerWidth <= 768 ? '90%' : '', margin: window.innerWidth <= 768 ? '0px auto' : '' }}>
+                            {parse(detailclean)}
                         </div>
                     </div>
                 </div>
             </div>
-            <Footer/>
-        </div>
-        
+            <Footer />
+        </div >
+
     )
 }
 
