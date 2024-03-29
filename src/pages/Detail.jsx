@@ -185,7 +185,9 @@ function Detail() {
                             }
                         </div>
                         <div className="row mt-2 detail" style={{ width: window.innerWidth <= 768 ? '90%' : '', margin: window.innerWidth <= 768 ? '0px auto' : '' }}>
-                            {parse(detailclean)}
+                            <div className='col-md w-100'>
+                                {parse(detailclean)}
+                            </div>
                         </div>
                     </div>
                 </div>
